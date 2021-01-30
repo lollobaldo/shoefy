@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import Calendar from 'react-calendar';
 
 import QRCode from 'qrcode.react';
 
