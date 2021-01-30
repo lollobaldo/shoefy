@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 const StyledDiv = styled.div`
@@ -14,10 +15,21 @@ const StyledDiv = styled.div`
 `;
 
 const Header = () => {
-  console.log('ciao');
+  const location = useLocation();
+  let headingLine;
+  switch (location.pathname) {
+    case '/':
+      headingLine = 'Make a Booking';
+      break;
+    default:
+      headingLine = 'Your Confirmation';
+      break;
+    // default:
+    //   headingLine = 'Error';
+  }
   return (
     <StyledDiv>
-      Make a booking
+      {headingLine}
     </StyledDiv>
   );
 };

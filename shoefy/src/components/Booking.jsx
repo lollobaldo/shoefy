@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Calendar from 'react-calendar';
 
@@ -19,19 +20,16 @@ const DateCont = styled.div`
   height: 40%;
 `;
 
-const Datecomp = () => {
-  const [value, onChange] = useState(new Date());
-  const hh = (e) => {
-    console.log(e);
-    onChange(e);
-  };
+// eslint-disable-next-line react/prop-types
+const Datecomp = ({ date, onChange }) => {
   const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
   return (
     <DateCont>
       <Calendar
-        onClickDay={hh}
-        value={value}
-        formatShortWeekday={(locale, date) => days[date.getDay()]}
+        onClickDay={onChange}
+        value={date}
+        minDate={new Date()}
+        formatShortWeekday={(locale, d) => days[d.getDay()]}
         prev2Label={null}
         next2Label={null} />
     </DateCont>
@@ -46,8 +44,12 @@ const TimeBtn = styled.button`
   padding: 16px;
   margin: 8px;
   outline: none;
-  border: 0;
+  border: 1px solid transparent;
   font-weight: bold;
+
+  &.active {
+    border: 1px solid #448AFF;
+  }
 `;
 
 const TimeCont = styled.div`
@@ -64,20 +66,20 @@ const format = (h, m) => {
   return `${hh}:${mm}`;
 };
 
-const TimeComp = () => {
+// eslint-disable-next-line react/prop-types
+const TimeComp = ({ time, onChange }) => {
   const items = [];
   for (let hour = 10; hour < 19; hour += 1) {
     items.push([hour, 0]);
     items.push([hour, 30]);
   }
-  // eslint-disable-next-line no-unused-vars
-  const [time, setTime] = useState();
   return (
     <TimeCont>
       {items.map(([h, m]) => (
         <TimeBtn
+          className={time && h === time[0] && m === time[1] ? 'active' : 'cc'}
           key={[h, m]}
-          onClick={() => setTime([h, m])}>
+          onClick={() => onChange([h, m])}>
           {format(h, m)}
         </TimeBtn>
       ))}
@@ -94,16 +96,28 @@ const Submit = styled.button`
   font-size: xx-large;
   outline: none;
   border: 0;
-  padding: 16px;
+  padding: 16px 32px;
 `;
 
 const Booking = () => {
-  console.log('ciao');
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState();
+
+  const history = useHistory();
+
+  const submit = () => {
+    const bookingDate = date;
+    bookingDate.setHours(time[0]);
+    bookingDate.setMinutes(time[1]);
+    const url = encodeURI(bookingDate.toISOString());
+    history.push(url);
+  };
+
   return (
     <BigContainer>
-      <Datecomp />
-      <TimeComp />
-      <Submit className="card" onClick={() => {}}>Confirm Booking</Submit>
+      <Datecomp date={date} onChange={setDate} />
+      <TimeComp time={time} onChange={setTime} />
+      <Submit className="card" onClick={submit}>Confirm Booking</Submit>
     </BigContainer>
   );
 };
