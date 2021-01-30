@@ -1,0 +1,38 @@
+.react-calendar__navigation {
+  color: #448AFF;
+  background: #E3F2FD;
+  font-size: large;
+
+  & button {
+    background: transparent;
+    outline: none;
+    border: 0;
+    font-size: large;
+    padding: 16px;
+    color: #448AFF;
+  }
+}
+
+.react-calendar__month-view__weekdays {
+  & abbr {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+  }
+}
+
+.react-calendar__month-view__days {
+  & button {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: large;
+    padding: 8px;
+
+    &.react-calendar__tile--active {
+      color: #448AFF;
+      border: 1px solid #448AFF;
+    }
+  }
+}
