@@ -16,23 +16,17 @@ const BigContainer = styled.div`
   justify-content: space-between;
 `;
 
-const DateCont = styled.div`
-  height: 40%;
-`;
-
 // eslint-disable-next-line react/prop-types
 const Datecomp = ({ date, onChange }) => {
-  const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'];
   return (
-    <DateCont>
-      <Calendar
-        onClickDay={onChange}
-        value={date}
-        minDate={new Date()}
-        formatShortWeekday={(locale, d) => days[d.getDay()]}
-        prev2Label={null}
-        next2Label={null} />
-    </DateCont>
+    <Calendar
+      onClickDay={onChange}
+      value={date}
+      minDate={new Date()}
+      formatShortWeekday={(locale, d) => days[d.getDay()]}
+      prev2Label={null}
+      next2Label={null} />
   );
 };
 
@@ -58,6 +52,7 @@ const TimeCont = styled.div`
   flex-wrap: wrap;
   max-height: 40%;
   overflow: scroll;
+  margin: 16px 0;
 `;
 
 const format = (h, m) => {

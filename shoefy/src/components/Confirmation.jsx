@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 
 import QRCode from 'qrcode.react';
 
-import BG from 'res/femaleiceskater.svg';
+import BG from 'res/try.png';
 
 import './calendar.scss';
 
