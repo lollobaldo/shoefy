@@ -1,10 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
-import QRCode from 'qrcode.react';
-
-import BG from 'res/try3.png';
+import BG from 'res/try2.png';
 
 const BigContainer = styled.div`
   height: calc(100% - 100px);
@@ -30,13 +28,25 @@ const SkaterPic = styled.div`
   height: 100%;
   flex-grow: 100%;
   background: url(${BG});
-  background-size: cover;
+  background-size: contain;
   background-position: center 100%;
   background-repeat: no-repeat;
   background-color: #448AFF;
 `;
 
-const QRWrapper = styled.div`
+const Submit = styled.button`
+  border-radius: 40px;
+  background: #448AFF;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  font-size: xx-large;
+  outline: none;
+  border: 0;
+  padding: 16px 32px;
+`;
+
+const SubmitWrapper = styled.div`
   width: 100%;
   background: #fff;
   display: flex;
@@ -45,31 +55,19 @@ const QRWrapper = styled.div`
   padding: 50px 0;
 `;
 
-const Confirmation = () => {
-  const { time } = useParams();
-  const bookingDate = Date.parse(time);
-  const dateFormat = new Intl.DateTimeFormat('en', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-  const timeFormat = new Intl.DateTimeFormat('en', {
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-  const bookingString = `${dateFormat.format(bookingDate)} at ${timeFormat.format(bookingDate)}`;
+const Home = () => {
+  const history = useHistory();
   return (
     <BigContainer>
-      <SummaryP>Your booking is confirmed for {bookingString}.<br />
-        You can take a screenshot of this page, or bookmark it.
+      <SummaryP>
+        Challenge your friends and race together. Amuse others with figure skating. Just have fun.
       </SummaryP>
       <SkaterPic src={BG} />
-      <QRWrapper>
-        <QRCode value={time} />
-      </QRWrapper>
+      <SubmitWrapper>
+        <Submit className="card" onClick={() => history.push('date')}>Make a Booking</Submit>
+      </SubmitWrapper>
     </BigContainer>
   );
 };
 
-export default Confirmation;
+export default Home;

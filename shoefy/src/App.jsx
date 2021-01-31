@@ -7,8 +7,10 @@ import {
 } from 'react-router-dom';
 
 import Header from 'components/Header';
+import Home from 'components/Home';
 import Booking from 'components/Booking';
 import Confirmation from 'components/Confirmation';
+import PhoneScreen from 'components/PhoneScreen';
 
 const MainDiv = styled.div`
   height: 100%;
@@ -18,17 +20,25 @@ const MainDiv = styled.div`
 function App() {
   return (
     <Router>
-      <MainDiv className="App">
-        <Header />
-        <Switch>
-          <Route path="/:id">
-            <Confirmation />
-          </Route>
-          <Route path="/">
-            <Booking />
-          </Route>
-        </Switch>
-      </MainDiv>
+      <PhoneScreen>
+        <MainDiv className="App">
+          <Header />
+          <Switch>
+            <Route path="/date">
+              <Booking />
+            </Route>
+            <Route path="/details">
+              <Booking />
+            </Route>
+            <Route path="/confirmation/:time">
+              <Confirmation />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </MainDiv>
+      </PhoneScreen>
     </Router>
   );
 }

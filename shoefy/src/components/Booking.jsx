@@ -51,8 +51,15 @@ const TimeCont = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   max-height: 40%;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: 16px 0;
+  /* ::-webkit-scrollbar              { border: 1px solid red }
+  ::-webkit-scrollbar-button       { border: 1px solid red } */
+  /* ::-webkit-scrollbar-track        { 3 }
+  /* ::-webkit-scrollbar-track-piece  {  }
+  /* ::-webkit-scrollbar-thumb        {  }
+  /* ::-webkit-scrollbar-corner       {  }
+  /* ::-webkit-resizer                {  } */
 `;
 
 const format = (h, m) => {
@@ -105,7 +112,7 @@ const Booking = () => {
     bookingDate.setHours(time[0]);
     bookingDate.setMinutes(time[1]);
     const url = encodeURI(bookingDate.toISOString());
-    history.push(url);
+    history.push(`confirmation/${url}`);
   };
 
   return (

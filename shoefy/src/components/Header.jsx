@@ -15,17 +15,24 @@ const StyledDiv = styled.div`
 `;
 
 const Header = () => {
-  const location = useLocation();
+  const location = useLocation().pathname.split('/');
+  console.log(location);
   let headingLine;
-  switch (location.pathname) {
-    case '/':
+  switch (location[1]) {
+    case '':
       headingLine = 'Make a Booking';
       break;
-    default:
+    case 'date':
+      headingLine = 'Pick a Date';
+      break;
+    case 'details':
+      headingLine = 'Pick a Date';
+      break;
+    case 'confirmation':
       headingLine = 'Your Confirmation';
       break;
-    // default:
-    //   headingLine = 'Error';
+    default:
+      headingLine = 'Error';
   }
   return (
     <StyledDiv>
