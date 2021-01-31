@@ -1,4 +1,5 @@
 from controller import Robot
+import math as Math
 
 class Movement():
     def __init__(self, ds, wheels, gps, speed, kb):
@@ -7,7 +8,19 @@ class Movement():
         self.gps = gps
         self.speed = speed
         self.kb = kb
+        self.coord = []
         
+    def distance(self, dest):
+        self.coord = self.gps.getValues()
+        ans = (dest[0] - self.coord[0])**2 + (dest[1] - self.coord[2])**2
+        return Math.sqrt(ans)
+        
+    def angle(self, dest):
+        self.coord = self.gps.getValues()
+        ans = (dest[1] - self.coord[2])/(dest[0]-self.coord[0])
+        ans = Math.degrees(Math.atan(ans))
+        return ans
+    
     def move(self):
         obstacle = [0,0]
         for i in range(2):  
@@ -26,6 +39,14 @@ class Movement():
         elif obstacle[1] == 1:
             self.right()
             return
+#        if self.distance(dest) > 0.1:
+ #           ang = self.angle(dest)
+  #          while abs(ang) > 5:
+   #             if ang > 0 :
+    #                self.left()
+     #           else:
+      #              self.right()
+       #         ang = self.angle(dest)
         self.forward()
     
     def control(self):
