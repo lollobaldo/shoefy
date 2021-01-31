@@ -5,18 +5,21 @@ class Movement():
     def __init__(self, ds, wheels, gps, speed, kb):
         self.ds = ds
         self.wheels = wheels
-        self.gps = gps
+        self.gps = gps #not done
         self.speed = speed
         self.kb = kb
-        self.coord = []
+        self.coord = [] #not done
+        self.auto = False
         
-    def distance(self, dest):
+    def distance(self, dest): #not done
         self.coord = self.gps.getValues()
         ans = (dest[0] - self.coord[0])**2 + (dest[1] - self.coord[2])**2
         return Math.sqrt(ans)
         
-    def angle(self, dest):
+    def angle(self, dest): #not done
         self.coord = self.gps.getValues()
+        if dest[0] - self.coord[0] == 0:
+            return 0
         ans = (dest[1] - self.coord[2])/(dest[0]-self.coord[0])
         ans = Math.degrees(Math.atan(ans))
         return ans
@@ -39,17 +42,13 @@ class Movement():
         elif obstacle[1] == 1:
             self.right()
             return
-#        if self.distance(dest) > 0.1:
- #           ang = self.angle(dest)
-  #          while abs(ang) > 5:
-   #             if ang > 0 :
-    #                self.left()
-     #           else:
-      #              self.right()
-       #         ang = self.angle(dest)
         self.forward()
     
     def control(self):
+        if self.auto:
+            self.move()
+        else:
+            self.stop()
         key = self.kb.getKey()
         if key == 314:
             self.left()
@@ -58,9 +57,7 @@ class Movement():
         elif key == 315:
             self.forward()
         elif key == 317:
-            self.stop()
-        else:
-            self.move()
+            self.auto = not self.auto
         
     def left(self):
         self.wheels[0].setVelocity(-self.speed/2)
