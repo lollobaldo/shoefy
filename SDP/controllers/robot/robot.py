@@ -18,12 +18,13 @@ for i in range(len(wheelsNames)):
     wheels[i].setPosition(float('inf'))
     wheels[i].setVelocity(0.0)
 
-pos = []
-posNames = ['posL','posR']
-for i in range(len(posNames)):
-    pos.append(robot.getDevice(posNames[i]))
-    pos[i].enable(64)
+gps = robot.getDevice('gps')
+gps.enable(64)
 
+kb = robot.getKeyboard()
+kb.enable(64)
+
+n=0
 while robot.step(TIME_STEP) != -1:
-    m = mv.Movement(ds, wheels, pos)
-    m.move(10.0)
+    m = mv.Movement(ds, wheels, gps, 10.0, kb)
+    m.control()
