@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Calendar from 'react-calendar';
 
+import { Shake } from 'components/animations';
+
 import './calendar.css';
 
 const BigContainer = styled.div`
@@ -110,10 +112,12 @@ const Submit = styled.button`
 const Booking = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState();
+  const [timeError, setTimeError] = useState(false);
 
   const history = useHistory();
 
   const submit = () => {
+    if (!time) { setTimeError(true); return; }
     const bookingDate = date;
     bookingDate.setHours(time[0]);
     bookingDate.setMinutes(time[1]);
@@ -124,7 +128,11 @@ const Booking = () => {
   return (
     <BigContainer>
       <Datecomp date={date} onChange={setDate} />
-      <TimeComp time={time} onChange={setTime} />
+      <Shake
+        playState={timeError ? 'running' : 'none'}
+        onAnimationEnd={() => setTimeError(false)}>
+        <TimeComp time={time} onChange={setTime} />
+      </Shake>
       <Submit className="card" onClick={submit}>Insert Details</Submit>
     </BigContainer>
   );
