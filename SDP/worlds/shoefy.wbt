@@ -3,15 +3,16 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.4410703782839572 -0.8482253422406932 -0.2932075888873033 4.974780928318457
-  position 1.4602668314053082 1.3790721910196304 0.7995856200491309
+  orientation 0.004321998988112106 0.8901370137178068 0.4556724888933848 3.1451133759504084
+  position 0.24397159638121813 7.426894777096015 -5.196222599084682
 }
 TexturedBackground {
 }
 Floor {
 }
 Robot {
-  translation 0 0.3 0
+  translation 0 0.1 0
+  scale 2 2 2
   children [
     DistanceSensor {
       translation -0.03 0 0.1
@@ -26,6 +27,47 @@ Robot {
         }
       ]
       name "dsR"
+      boundingObject USE sensor
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.05 0 0
+      rotation 0 1 0 -3.141592653589793
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "dsSR"
+      boundingObject USE sensor
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.05 0 0
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "dsSL"
       boundingObject USE sensor
       physics Physics {
       }
@@ -63,18 +105,21 @@ Robot {
         size 0.1 0.05 0.2
       }
     }
-    HingeJoint {
+    DEF wheelLF HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.06 0 0.05
       }
       device [
+        PositionSensor {
+          name "posL"
+        }
         RotationalMotor {
           name "wheelLF"
         }
       ]
       endPoint Solid {
-        translation 0.059999999992443924 3.944509414995079e-06 0.049999999943319086
-        rotation 3.951209270017702e-13 -3.95109682078017e-13 1 1.5707996938967141
+        translation 0.060004348487124215 1.6497732466144229e-06 0.049974956485942454
+        rotation -0.14604703066808308 0.14430859776733035 0.9786957103428332 1.5933761199380534
         children [
           DEF wheel Shape {
             appearance PBRAppearance {
@@ -90,7 +135,7 @@ Robot {
         }
       }
     }
-    HingeJoint {
+    DEF wheelLR HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.06 0 -0.05
       }
@@ -100,8 +145,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.05999999999623748 3.91721598658884e-06 -0.05000000004254095
-        rotation -3.6311328247075827e-13 3.6312739982879583e-13 1 1.570799693896861
+        translation 0.060014830930629204 -7.230134244095258e-06 -0.04999725261319623
+        rotation -0.14604610059895307 0.14430863555818674 0.9786958435607944 1.5933753937081439
         children [
           USE wheel
         ]
@@ -111,18 +156,21 @@ Robot {
         }
       }
     }
-    HingeJoint {
+    DEF wheelRF HingeJoint {
       jointParameters HingeJointParameters {
         anchor -0.06 0 0.05
       }
       device [
+        PositionSensor {
+          name "posR"
+        }
         RotationalMotor {
           name "wheelRF"
         }
       ]
       endPoint Solid {
-        translation -0.06000000000670302 3.948501637082713e-06 0.04999999994635435
-        rotation -2.0913140309311093e-13 2.0914474508961314e-13 1 1.5707996938967463
+        translation -0.06002626743024142 4.035359892664091e-05 0.050011911957033535
+        rotation -0.16575598791266669 0.16480519019695597 0.9722984118855904 1.6008472245324463
         children [
           USE wheel
         ]
@@ -133,7 +181,7 @@ Robot {
         }
       }
     }
-    HingeJoint {
+    DEF wheelRR HingeJoint {
       jointParameters HingeJointParameters {
         anchor -0.06 0 -0.05
       }
@@ -143,8 +191,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.06 0 -0.05
-        rotation 5.382267887775747e-13 2.0510868305705506e-12 1 1.5707996936283761
+        translation -0.059992578006273556 2.0904092974336402e-05 -0.05000537555973068
+        rotation -0.16575614167977887 0.16480350132472793 0.9722986719349891 1.6008497858283024
         children [
           USE wheel
         ]
@@ -162,10 +210,14 @@ Robot {
   }
   controller "robot"
 }
+Shelves {
+  translation -2.3 0 0
+}
 TexturedBackgroundLight {
 }
 DEF WALL_1 Solid {
-  translation 0.5 0.05 0
+  translation 2.5 0.05 0
+  scale 5 5 5
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
@@ -181,7 +233,8 @@ DEF WALL_1 Solid {
   boundingObject USE WALL_SHAPE
 }
 DEF WALL_2 Solid {
-  translation -0.5 0.05 0
+  translation -2.5 0.05 0
+  scale 5 5 5
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
@@ -198,8 +251,9 @@ DEF WALL_2 Solid {
   boundingObject USE WALL_SHAPE
 }
 DEF WALL_3 Solid {
-  translation 0 0.05 -0.5
+  translation 0 0.05 -2.5
   rotation 0 1 0 1.5708
+  scale 5 5 5
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
@@ -216,8 +270,9 @@ DEF WALL_3 Solid {
   boundingObject USE WALL_SHAPE
 }
 DEF WALL_4 Solid {
-  translation 0 0.05 0.5
+  translation 0 0.05 2.5
   rotation 0 1 0 1.5708
+  scale 5 5 5
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
