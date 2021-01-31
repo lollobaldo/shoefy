@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.004321998988112106 0.8901370137178068 0.4556724888933848 3.1451133759504084
-  position 0.24397159638121813 7.426894777096015 -5.196222599084682
+  orientation 0.0015999773172463807 0.9295774253192566 0.3686234534174492 3.133140911610369
+  position -0.010523644796044472 5.7035498753649705 -5.819365802894228
 }
 TexturedBackground {
 }
@@ -14,6 +14,16 @@ Robot {
   translation 0 0.1 0
   scale 2 2 2
   children [
+    GPS {
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0.498039
+      }
+      geometry Box {
+        size 0.1 0.05 0.2
+      }
+    }
     DistanceSensor {
       translation -0.03 0 0.1
       rotation 0 1 0 -2.094399693899575
@@ -21,8 +31,8 @@ Robot {
         DEF sensor Shape {
           appearance PBRAppearance {
           }
-          geometry Box {
-            size 0.01 0.01 0.01
+          geometry Sphere {
+            radius 0.01
           }
         }
       ]
@@ -42,8 +52,8 @@ Robot {
         DEF sensor Shape {
           appearance PBRAppearance {
           }
-          geometry Box {
-            size 0.01 0.01 0.01
+          geometry Sphere {
+            radius 0.01
           }
         }
       ]
@@ -62,8 +72,8 @@ Robot {
         DEF sensor Shape {
           appearance PBRAppearance {
           }
-          geometry Box {
-            size 0.01 0.01 0.01
+          geometry Sphere {
+            radius 0.01
           }
         }
       ]
@@ -83,8 +93,8 @@ Robot {
         DEF sensor Shape {
           appearance PBRAppearance {
           }
-          geometry Box {
-            size 0.01 0.01 0.01
+          geometry Sphere {
+            radius 0.01
           }
         }
       ]
@@ -97,29 +107,18 @@ Robot {
         0.2 1000 0
       ]
     }
-    DEF BODY Shape {
-      appearance PBRAppearance {
-        baseColor 0.666667 0 0.498039
-      }
-      geometry Box {
-        size 0.1 0.05 0.2
-      }
-    }
     DEF wheelLF HingeJoint {
       jointParameters HingeJointParameters {
         anchor 0.06 0 0.05
       }
       device [
-        PositionSensor {
-          name "posL"
-        }
         RotationalMotor {
           name "wheelLF"
         }
       ]
       endPoint Solid {
         translation 0.060004348487124215 1.6497732466144229e-06 0.049974956485942454
-        rotation -0.14604703066808308 0.14430859776733035 0.9786957103428332 1.5933761199380534
+        rotation -0.1460470306680831 0.14430859776733038 0.9786957103428333 1.5933761199380534
         children [
           DEF wheel Shape {
             appearance PBRAppearance {
@@ -161,9 +160,6 @@ Robot {
         anchor -0.06 0 0.05
       }
       device [
-        PositionSensor {
-          name "posR"
-        }
         RotationalMotor {
           name "wheelRF"
         }
