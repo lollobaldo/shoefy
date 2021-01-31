@@ -52,22 +52,6 @@ const TimeCont = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  max-height: 40%;
-  overflow-y: scroll;
-  margin: 16px 0;
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: #E3F2FD;
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #448AFF;
-  }
 `;
 
 const format = (h, m) => {
@@ -109,6 +93,27 @@ const Submit = styled.button`
   padding: 16px 32px;
 `;
 
+const ShakeExt = styled(Shake)`
+  max-height: 40%;
+  overflow-y: scroll;
+  margin: 16px 0;
+  z-index: 1;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #E3F2FD;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #448AFF;
+  }
+`;
+
 const Booking = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState();
@@ -128,11 +133,11 @@ const Booking = () => {
   return (
     <BigContainer>
       <Datecomp date={date} onChange={setDate} />
-      <Shake
+      <ShakeExt
         playState={timeError ? 'running' : 'none'}
         onAnimationEnd={() => setTimeError(false)}>
         <TimeComp time={time} onChange={setTime} />
-      </Shake>
+      </ShakeExt>
       <Submit className="card" onClick={submit}>Insert Details</Submit>
     </BigContainer>
   );
