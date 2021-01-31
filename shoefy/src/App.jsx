@@ -9,6 +9,7 @@ import {
 import Header from 'components/Header';
 import Home from 'components/Home';
 import Booking from 'components/Booking';
+import Details from 'components/Details';
 import Confirmation from 'components/Confirmation';
 import PhoneScreen from 'components/PhoneScreen';
 
@@ -27,10 +28,10 @@ function App() {
             <Route path="/date">
               <Booking />
             </Route>
-            <Route path="/details">
-              <Booking />
+            <Route path="/details/:time">
+              <Details />
             </Route>
-            <Route path="/confirmation/:time">
+            <Route path="/confirmation/:time/:name">
               <Confirmation />
             </Route>
             <Route path="/">

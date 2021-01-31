@@ -26,7 +26,7 @@ const Header = () => {
       headingLine = 'Pick a Date';
       break;
     case 'details':
-      headingLine = 'Pick a Date';
+      headingLine = 'Add your Details';
       break;
     case 'confirmation':
       headingLine = 'Your Confirmation';

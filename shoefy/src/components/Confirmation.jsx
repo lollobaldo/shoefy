@@ -46,7 +46,7 @@ const QRWrapper = styled.div`
 `;
 
 const Confirmation = () => {
-  const { time } = useParams();
+  const { name, time } = useParams();
   const bookingDate = Date.parse(time);
   const dateFormat = new Intl.DateTimeFormat('en', {
     weekday: 'long',
@@ -61,7 +61,7 @@ const Confirmation = () => {
   const bookingString = `${dateFormat.format(bookingDate)} at ${timeFormat.format(bookingDate)}`;
   return (
     <BigContainer>
-      <SummaryP>Your booking is confirmed for {bookingString}.<br />
+      <SummaryP>Hi {name}.<br /> Your booking is confirmed for {bookingString}.<br />
         You can take a screenshot of this page, or bookmark it.
       </SummaryP>
       <SkaterPic src={BG} />

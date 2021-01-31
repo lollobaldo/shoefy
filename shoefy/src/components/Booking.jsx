@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Calendar from 'react-calendar';
 
-import './calendar.scss';
+import './calendar.css';
 
 const BigContainer = styled.div`
   height: calc(100% - 100px);
@@ -53,13 +53,19 @@ const TimeCont = styled.div`
   max-height: 40%;
   overflow-y: scroll;
   margin: 16px 0;
-  /* ::-webkit-scrollbar              { border: 1px solid red }
-  ::-webkit-scrollbar-button       { border: 1px solid red } */
-  /* ::-webkit-scrollbar-track        { 3 }
-  /* ::-webkit-scrollbar-track-piece  {  }
-  /* ::-webkit-scrollbar-thumb        {  }
-  /* ::-webkit-scrollbar-corner       {  }
-  /* ::-webkit-resizer                {  } */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #E3F2FD;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #448AFF;
+  }
 `;
 
 const format = (h, m) => {
@@ -112,14 +118,14 @@ const Booking = () => {
     bookingDate.setHours(time[0]);
     bookingDate.setMinutes(time[1]);
     const url = encodeURI(bookingDate.toISOString());
-    history.push(`confirmation/${url}`);
+    history.push(`details/${url}`);
   };
 
   return (
     <BigContainer>
       <Datecomp date={date} onChange={setDate} />
       <TimeComp time={time} onChange={setTime} />
-      <Submit className="card" onClick={submit}>Confirm Booking</Submit>
+      <Submit className="card" onClick={submit}>Insert Details</Submit>
     </BigContainer>
   );
 };
