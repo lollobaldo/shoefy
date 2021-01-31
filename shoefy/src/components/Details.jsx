@@ -123,7 +123,7 @@ const SizeCont = styled.div`
 // eslint-disable-next-line react/prop-types
 const SizeComp = ({ selected, onChange }) => {
   const items = [];
-  for (let size = 25; size <= 45; size += 1) {
+  for (let size = 1; size <= 15; size += 1) {
     items.push(size);
   }
   return (
