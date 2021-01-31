@@ -169,9 +169,8 @@ const Group = styled.div`
 `;
 
 const ShakeExt = styled(Shake)`
-  max-height: 40%;
   overflow-y: scroll;
-  margin: 16px 0;
+  margin: 0 0 16px 0;
   z-index: 1;
 
   ::-webkit-scrollbar {
@@ -229,11 +228,14 @@ const Details = () => {
           <TextInput name="Email" value={email} onChange={setEmail} />
         </Shake>
       </Group>
+      {/* <Group> */}
+      <p style={{ padding: '8px 0 0 8px', width: '100%', marginBottom: 'calc(1em - 8px)' }}>What&apos;s your shoe size?</p>
       <ShakeExt
         playState={sizeError ? 'running' : 'none'}
         onAnimationEnd={() => setSizeError(false)}>
         <SizeComp selected={size} onChange={setSize} />
       </ShakeExt>
+      {/* </Group> */}
       <Submit className="card" onClick={submit} type="button">Insert Details</Submit>
       {/* </form> */}
     </BigContainer>
