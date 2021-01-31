@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 
 const StyledAppScreen = styled.div`
   width: 100%;
+  height: 100%;
 
   & #content {
     height: 100%;
