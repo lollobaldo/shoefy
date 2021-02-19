@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/georgi/shoefy/SDP/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/georgi/shoefy/SDP/catkin_ws/install -G Unix Makefiles

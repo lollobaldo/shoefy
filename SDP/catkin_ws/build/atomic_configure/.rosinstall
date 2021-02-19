@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/georgi/shoefy/SDP/catkin_ws/devel/setup.sh
