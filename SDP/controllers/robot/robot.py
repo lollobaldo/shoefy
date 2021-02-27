@@ -5,7 +5,8 @@ import math
 
 def run_robot(robot):
     TIME_STEP = 64
-
+    
+    #initiating sensors/motors
     ps = []
     psNames = ['ps1', 'ps2']
     for i in range(len(psNames)):
@@ -21,10 +22,11 @@ def run_robot(robot):
 
     kb = robot.getKeyboard()
     kb.enable(64)
-
+    
+    #helper function from movement.py
     m = mv.Movement(wheels, 10.0)
     
-    #odometry
+    #variable for calculating odometry
     radius = 0.057
     pos = [0,0,0]
     last_psV = [0,0]
@@ -37,11 +39,10 @@ def run_robot(robot):
     dt = 1
     showPos = False
     target = [4, 4]
-    #count = 0
-    #last_dist = 0 
     
     while robot.step(TIME_STEP) != -1:
         
+        #calculating angular velocity and directional velocity
         for i in range(len(psNames)):
             curr_psV[i] = ps[i].getValue() * radius
             diff[i] = curr_psV[i] - last_psV[i]
@@ -51,35 +52,32 @@ def run_robot(robot):
         v = (diff[0] + diff[1]) / 2
         w = (diff[0] - diff[1]) / wheel_dist
         
+        #updating current position/coordinate
         pos[2] += w * dt
-        #pos[2] %= 2*math.pi
         vx = v * math.cos(pos[2])
         vy = v * math.sin(pos[2])
         pos[0] += vx * dt
         pos[1] += vy * dt
         
+        #show current position by pressing the key 'S'
         key = kb.getKey()
         if key == 83:
             showPos = not showPos
+        #m.contol(key)
         if showPos:
             print("position: {}".format(pos))
-          
+        
+        #move to target  
         dist = distance([pos[0], pos[1]], target)
         if dist > 1:
-            #if last_dist < dist:
-                #count+=1
             angle = (target[1] - pos[1])/(target[0] - pos[0])
             angle = math.atan(angle) - pos[2]
-            #if count == 2:
-                #pos[2] += math.pi
-                #count = 0
             if angle > 0.1:
                 m.control(314)
             elif angle < -0.1:
                 m.control(316)
             else:
                 m.control(315)
-            #last_dist = dist
         else:
             m.control(1234567890)
             print("reached!")
