@@ -46,7 +46,7 @@ def run_robot(robot):
         for i in range(len(psNames)):
             curr_psV[i] = ps[i].getValue() * radius
             diff[i] = curr_psV[i] - last_psV[i]
-            if diff[i] == 0.001:
+            if diff[i] < 0.001:
                 diff[i] = 0
                 curr_psV[i] = last_psV[i]
         v = (diff[0] + diff[1]) / 2
