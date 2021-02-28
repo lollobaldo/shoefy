@@ -38,6 +38,9 @@ def run_robot(robot):
     dt = 1
     showPos = False
     target = [4, 4]
+    seq = []
+    reached = False
+    count = 1
     
     while robot.step(TIME_STEP) != -1:
         
@@ -68,18 +71,27 @@ def run_robot(robot):
         
         #move to target  
         dist = distance([pos[0], pos[1]], target)
-        if dist > 1:
-            angle = (target[1] - pos[1])/(target[0] - pos[0])
-            angle = math.atan(angle) - pos[2]
-            if angle > 0.1:
-                m.control(314)
-            elif angle < -0.1:
-                m.control(316)
+        if not reached:
+            if dist > 1:
+                angle = (target[1] - pos[1])/(target[0] - pos[0])
+                angle = math.atan(angle) - pos[2]
+                if angle > 0.1:
+                    m.left()
+                    seq.append(316)
+                elif angle < -0.1:
+                    m.right()
+                    seq.append(314)
+                else:
+                    m.forward()
+                    seq.append(317)
             else:
-                m.control(315)
+                reached = True
         else:
-            m.control(1234567890)
-            print("reached!")
+            if count == len(seq):
+                m.stop()
+            else:
+                m.control(seq[len(seq) - count])
+                count+=1
         
         for i in range(len(psNames)):
             last_psV[i] = curr_psV[i]
