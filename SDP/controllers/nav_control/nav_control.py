@@ -11,15 +11,21 @@ def run_robot(robot):
     gyro = robot.getDevice('g1')
     gyro.enable(TIME_STEP)
     
+    ds = []
+    dsNames = ['dsR', 'dsL']
+    for i in range(len(dsNames)):
+        ds.append(robot.getDevice(dsNames[i]))
+        ds[i].enable(TIME_STEP)
+    
     #initiating sensors/motors
     ps = []
-    psNames = ['ps1', 'ps2']
+    psNames = ['psR', 'psL']
     for i in range(len(psNames)):
         ps.append(robot.getDevice(psNames[i]))
         ps[i].enable(TIME_STEP)
     
     wheels = []
-    wheelsNames = ['wheel1', 'wheel2']
+    wheelsNames = ['wheelR', 'wheelL']
     for i in range(len(wheelsNames)):
         wheels.append(robot.getDevice(wheelsNames[i]))
         wheels[i].setPosition(float('inf'))
@@ -43,7 +49,7 @@ def run_robot(robot):
     dt = 0.064
     showPos = False
     reached = False
-    count = 0
+    counter = 0
     base = [0, 0]
     target = [0, 0]
     for i in range(0, len(sys.argv)-1):
@@ -91,6 +97,7 @@ def run_robot(robot):
                     else:
                         angle = -math.pi
                 angle -= pos[2]
+                print(angle)
                 if angle > 0.1 and angle < math.pi:
                     m.left()
                 elif angle < -0.1 and angle > -math.pi:
@@ -99,11 +106,14 @@ def run_robot(robot):
                     m.forward()
             else:
                 reached = True
+        #reached destination, preparing to head back
         else:
-            if count == 1:
+        #exit if reached second destination 
+        #second destination = base
+            if counter == 1:
                 m.stop()
                 exit()
-            count =+ 1
+            counter += 1
             target = base
             reached = False
         
