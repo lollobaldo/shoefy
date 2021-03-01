@@ -10,8 +10,10 @@ webots world has a weird coordinate system where vertical/height is y axis,
 x < 0 = right, x > 0 = left
 z > 0 = up, z < 0 = bottom
 
+
 requirement for nav_control.py:
 jule-shoefy.wbt
+
 
 changes of jule-shoefy.wbt:
 
