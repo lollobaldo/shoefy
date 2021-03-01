@@ -1,3 +1,5 @@
+# this will eventually use GTK to display a graphical interface, but I'm developing on Windows and it's not behaving for me
+
 import json
 import cv2
 from shoefyAPI import shoefy
