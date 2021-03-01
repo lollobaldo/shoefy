@@ -11,7 +11,7 @@ x < 0 = right, x > 0 = left
 z > 0 = up, z < 0 = bottom
 
 requirement for nav_control.py:
-jule-shoefy.wbt\
+jule-shoefy.wbt\\
 
 changes of jule-shoefy.wbt:
 
