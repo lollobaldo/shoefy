@@ -4,7 +4,7 @@ class Arm():
     def __init__(self, motor):
         self.motor = motor
         self.sensor = motor.getPositionSensor()
-        # self.sensor.enable(10)
+        self.sensor.enable(10)
  
     def out(self):
         print('pushing')

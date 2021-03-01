@@ -18,7 +18,7 @@ arm = arm.Arm(armMotor)
 
 # arm.out()
 
-grabConnector = robot.getDevice('robotConnector')
+grabConnector = robot.getDevice('connector')
 # grab = grab.Grab(grabConnector )
 
 
