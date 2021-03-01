@@ -1,42 +1,23 @@
 from controller import Robot
 from controller import PositionSensor
-from controller import Supervisor
 import movement as mv
 import math
-import numpy as np
-
-
-def get_coord(supervisor):
-    ur10e = supervisor.getFromDef('SHOEFY')
-    box = supervisor.getFromDef('DEST_BOX')
-
-    # rot_ur10e = np.array(ur10e.getOrientation())
-    # # reshape into a 3x3 rotation matrix
-    # rot_ur10e.reshape(3, 3)
-    # rot_ur10e = np.transpose(rot_ur10e)
-    # pos_ur10e = np.array(ur10e.getPosition())
-    #
-    # # Box position relative to world.
-    # box_pos_world = np.array(box.getPosition())
-    # # Calculate the relative translation between the box and the robot.
-    # box_pos_world = np.subtract(box_pos_world, pos_ur10e)
-    # # Matrix multiplication with rotation matrix: box position relative to robot.
-    # # box_pos_robot = np.dot(rot_ur10e, box_pos_world)
-    # box_rot_robot = np.dot(rot_ur10e, np.array(box.getOrientation()).reshape(3, 3))
-
-    return np.array(box.getPosition())
-
+from controller import Gyro
+import sys
 
 def run_robot(robot):
     TIME_STEP = 64
-
-    # initiating sensors/motors
+    
+    gyro = robot.getDevice('g1')
+    gyro.enable(TIME_STEP)
+    
+    #initiating sensors/motors
     ps = []
     psNames = ['ps1', 'ps2']
     for i in range(len(psNames)):
         ps.append(robot.getDevice(psNames[i]))
         ps[i].enable(TIME_STEP)
-
+    
     wheels = []
     wheelsNames = ['wheel1', 'wheel2']
     for i in range(len(wheelsNames)):
@@ -46,30 +27,29 @@ def run_robot(robot):
 
     kb = robot.getKeyboard()
     kb.enable(64)
-
-    # helper function from movement.py
+    
+    #helper function from movement.py
     m = mv.Movement(wheels, 10.0)
-
-    # variable for calculating odometry
+    
+    #variable for calculating odometry
     radius = 0.057
-    pos = [0, 0, 0]
-    last_psV = [0, 0]
-    curr_psV = [0, 0]
-    diff = [0, 0]
+    pos = [0,0,0]
+    last_psV = [0,0]
+    curr_psV = [0,0]
+    diff = [0,0]
     v = 0
     w = 0
     wheel_dist = 0.414
-    dt = 1
+    dt = 0.064
     showPos = False
-    target = [1, 1]
-    # tt = get_coord(supervisor)
-    # print(tt[0])
-    # print(tt[1])
-    # target = [tt[0], tt[1]]
-
+    reached = False
+    count = 0
+    base = [0, 0]
+    target = [0, 0]
+    for i in range(0, len(sys.argv)-1):
+        target[i] = int(sys.argv[i+1])
     while robot.step(TIME_STEP) != -1:
-
-        # calculating angular velocity and directional velocity
+        #calculating angular velocity and directional velocity
         for i in range(len(psNames)):
             curr_psV[i] = ps[i].getValue() * radius
             diff[i] = curr_psV[i] - last_psV[i]
@@ -77,52 +57,64 @@ def run_robot(robot):
                 diff[i] = 0
                 curr_psV[i] = last_psV[i]
         v = (diff[0] + diff[1]) / 2
-        w = (diff[0] - diff[1]) / wheel_dist
-
-        # updating current position/coordinate
+        w = gyro.getValues()[1]
+        
+        #updating current position/coordinate
         pos[2] += w * dt
-        vx = v * math.cos(pos[2])
-        vy = v * math.sin(pos[2])
-        pos[0] += vx * dt
-        pos[1] += vy * dt
-
-        # show current position by pressing the key 'S'
+        pos[2] %= 2*math.pi
+        if pos[2] > math.pi:
+            pos[2] -= 2*math.pi
+        pos[0] += v * math.cos(pos[2])
+        pos[1] += v * math.sin(pos[2])
+        
+        #show current position by pressing the key 'S'
         key = kb.getKey()
         if key == 83:
             showPos = not showPos
-        # m.contol(key)
         if showPos:
             print("position: {}".format(pos))
-
-        # move to target
+        
+        #move to target  
         dist = distance([pos[0], pos[1]], target)
-        if dist > 1:
-            angle = (target[1] - pos[1]) / (target[0] - pos[0])
-            angle = math.atan(angle) - pos[2]
-            if angle > 0.1:
-                m.control(314)
-            elif angle < -0.1:
-                m.control(316)
+        if not reached:
+            if dist > 1:
+                if target[0] - pos[0] != 0:
+                    angle = (target[1] - pos[1])/(target[0] - pos[0])
+                    angle = math.atan(angle)
+                    if angle > 0 and pos[0] > target[0]:
+                        angle -= math.pi
+                    elif angle < 0 and pos[0] < target[0]:
+                        angle += math.pi
+                else:
+                    if target[1] > pos[1]:
+                        angle = math.pi
+                    else:
+                        angle = -math.pi
+                angle -= pos[2]
+                if angle > 0.1 and angle < math.pi-0.1:
+                    m.left()
+                elif angle < -0.1 and angle > -math.pi+0.1:
+                    m.right()
+                else:
+                    m.forward()
             else:
-                m.control(315)
+                reached = True
         else:
-            m.control(1234567890)
-            print("reached!")
-
+            if count == 1:
+                m.stop()
+                exit()
+            count =+ 1
+            target = base
+            reached = False
+        
         for i in range(len(psNames)):
             last_psV[i] = curr_psV[i]
-
 
 def distance(source, target):
     ans = (target[1] - source[1]) ** 2
     ans += (target[0] - source[0]) ** 2
     return math.sqrt(ans)
 
-
 if __name__ == '__main__':
-    # robot = Robot()
-    supervisor = Supervisor()
-    pos = get_coord(supervisor)
-    print("Box coord")
-    print(pos)
-    # run_robot(robot)
+    robot = Robot()
+    run_robot(robot)
