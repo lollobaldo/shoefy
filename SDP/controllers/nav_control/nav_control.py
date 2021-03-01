@@ -91,9 +91,9 @@ def run_robot(robot):
                     else:
                         angle = -math.pi
                 angle -= pos[2]
-                if angle > 0.1 and angle < math.pi-0.1:
+                if angle > 0.1 and angle < math.pi:
                     m.left()
-                elif angle < -0.1 and angle > -math.pi+0.1:
+                elif angle < -0.1 and angle > -math.pi:
                     m.right()
                 else:
                     m.forward()
