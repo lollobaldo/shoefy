@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow" id="displayDetails">
+    <property name="can-focus">False</property>
+    <child>
+      <object class="GtkFixed" id="fixed2">
+        <property name="width-request">840</property>
+        <property name="height-request">736</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkButton" id="backBtn">
+            <property name="label" translatable="yes">Done</property>
+            <property name="width-request">281</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="goBack" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">275</property>
+            <property name="y">619</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label2">
+            <property name="width-request">300</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Shoefy</property>
+            <attributes>
+              <attribute name="font-desc" value="Sans Bold 42"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">266</property>
+            <property name="y">44</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkTextView" id="txtOutput">
+            <property name="width-request">740</property>
+            <property name="height-request">428</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+          </object>
+          <packing>
+            <property name="x">48</property>
+            <property name="y">143</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="scanWindow">
+    <property name="can-focus">False</property>
+    <child>
+      <object class="GtkFixed" id="fixed1">
+        <property name="width-request">840</property>
+        <property name="height-request">736</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkButton" id="scanBtn">
+            <property name="label" translatable="yes">Scan QR code</property>
+            <property name="width-request">281</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="scanCode" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">275</property>
+            <property name="y">619</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="width-request">300</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Shoefy</property>
+            <attributes>
+              <attribute name="font-desc" value="Sans Bold 42"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">266</property>
+            <property name="y">44</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="imgBox">
+            <property name="width-request">597</property>
+            <property name="height-request">395</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">..\..\..\..\qr.png</property>
+          </object>
+          <packing>
+            <property name="x">123</property>
+            <property name="y">168</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
