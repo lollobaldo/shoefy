@@ -14,6 +14,7 @@ requirement for nav_control.py:
 jule-shoefy.wbt
 
 changes of jule-shoefy.wbt:
+
 added 2 distance sensors: dsL,dsR
 rename wheel1,wheel2 -> wheelR, wheelL
 rename ps1,ps2 -> psR, psL
