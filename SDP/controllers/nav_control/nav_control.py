@@ -39,7 +39,7 @@ def run_robot(robot):
     
     #variable for calculating odometry
     radius = 0.057
-    pos = [0,0,0]
+    pos = [0, 0, 0]
     last_psV = [0,0]
     curr_psV = [0,0]
     diff = [0,0]
@@ -53,7 +53,7 @@ def run_robot(robot):
     base = [0, 0]
     target = [0, 0]
     for i in range(0, len(sys.argv)-1):
-        target[i] = int(sys.argv[i+1])
+        target[i] = float(sys.argv[i+1])
     while robot.step(TIME_STEP) != -1:
         #calculating angular velocity and directional velocity
         for i in range(len(psNames)):
@@ -97,7 +97,10 @@ def run_robot(robot):
                     else:
                         angle = -math.pi
                 angle -= pos[2]
-                print(angle)
+                if angle < -math.pi:
+                    angle += 2 * math.pi
+                elif angle > math.pi:
+                    angle -= 2 * math.pi
                 if angle > 0.1 and angle < math.pi:
                     m.left()
                 elif angle < -0.1 and angle > -math.pi:
