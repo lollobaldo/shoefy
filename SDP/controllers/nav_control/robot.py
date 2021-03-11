@@ -49,6 +49,7 @@ def run(robot, order):
         ir2 = ir[2].getValue()
         turnR = 450 < ir0 and ir0 < 500
         turnL = 450 < ir2 and ir2 < 500
+        junction = 800 < ir1 and ir1 < 820
 
         if intersection:
             if order[count] == 'left':
@@ -64,7 +65,7 @@ def run(robot, order):
                 intersection = False
                 count += 1
         else:
-            if turnL and turnR:
+            if junction:
                 intersection = True
             elif turnR:
                 right()
