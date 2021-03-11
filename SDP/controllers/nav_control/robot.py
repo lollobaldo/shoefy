@@ -55,7 +55,7 @@ def run(robot, order):
                 left()
             elif order[count] == 'right':
                 right()
-            elif order[count] == 'striaght':
+            elif order[count] == 'straight':
                 forward()
             else:
                 stop()
