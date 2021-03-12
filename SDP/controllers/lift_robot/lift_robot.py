@@ -32,7 +32,7 @@ lift = lift.Lift(liftMotors)
 
 
 level3 = 0.183
-level3 = 0.18
+level3 = 0.29
 lift.go(level3)
 
 # while(not arm.isOut()):
