@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.05464161120063575 0.9350424648541364 0.35029970488839907 3.0618162495003443
-  position 1.3808260609722343 15.46703995259963 -15.028254135893906
+  orientation 0.05221608799286852 0.8284312007688224 0.557651527163199 3.0634082486088112
+  position 0.5824627056428993 16.524848756930968 -7.624161952182518
 }
 TexturedBackground {
   texture "empty_office"
@@ -12,8 +12,8 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 Solid {
-  translation 4.31832 2.28243 3.62716
-  rotation -0.8373908886777631 0.22921086698620405 0.4962246245551492 -0.0006639982412641978
+  translation 4.3182745147657835 2.2825714059736413 3.627014548211735
+  rotation -0.5846230717020698 -0.6517445057844243 -0.48316142562652215 0.00023354875929745936
   scale 0.7 0.7 0.7
   children [
     Connector {
@@ -40,12 +40,13 @@ Solid {
     size 0.6 0.6 0.6
   }
   physics DEF box_phy Physics {
+    density -1
     mass 1
   }
 }
 Solid {
-  translation 3.68005 2.28489 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 3.6800403173364766 2.2826067048708136 3.62993402665037
+  rotation -0.9874229790787202 0.0027124080831638525 -0.158077522847796 0.00010272846724889083
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -55,8 +56,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 0.57005 2.28499 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 0.5700623912959663 2.2825701296185588 3.6299275855281747
+  rotation -0.73689347688355 0.000497655646807335 -0.6760086952586705 0.00018003544913843293
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -66,8 +67,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -2.78995 2.2852 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -2.78996279361297 2.2825418078809 3.629955481717549
+  rotation -1.862881690142214e-05 0.06743288947741323 -0.9977238120189846 1.8770798169202548e-06
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -77,8 +78,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -3.48995 2.2852 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -3.4899596934268042 2.2826067047500773 3.6299340432761515
+  rotation -0.9874234187555543 0.0025397327696101263 -0.1580776450057133 0.0001027283955859994
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -88,8 +89,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -4.18995 2.2852 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -4.1899697225790815 2.2825971004505434 3.629981846463019
+  rotation -0.9706276331190271 -0.0009918275838534988 -0.24058473372971814 -0.00012933940729096795
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -99,8 +100,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -0.09995 2.28499 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -0.09995968119517289 2.2826067049132313 3.629934010110185
+  rotation -0.9874228019918982 0.0027776502638785358 -0.15807749607543772 0.00010272851363194913
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -110,8 +111,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -0.77995 2.28499 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -0.7799690743386479 2.282598723414927 3.62998196853499
+  rotation -0.9761535148779482 -0.001002247038432231 -0.21707904295970526 -0.00012910713306398216
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -121,8 +122,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 2.98005 2.28489 3.62994
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 2.9800302779644947 2.282597100632111 3.6299818469622607
+  rotation -0.9706276245615835 -0.0009922583125155987 -0.24058476647821925 -0.0001293395923302439
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -132,8 +133,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 2.99001 1.74489 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 2.9899932137433165 1.7448909654779434 3.61002193973271
+  rotation -0.9909443336624661 -0.0009997943020836157 -0.13426960934479706 -0.0001271495534670602
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -143,8 +144,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -0.77999 1.74503 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -0.7800007631082067 1.7448882408795456 3.610025221646471
+  rotation -0.9971471787025203 0.0005102206613698723 0.07548008797345634 -0.00014269993486303658
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -154,8 +155,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 4.33001 1.74489 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 4.329997009223182 1.74486385466353 3.610026418761298
+  rotation -0.9999769475213138 -0.0008438463640509609 0.006737384453160887 -0.00014734945561126745
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -165,8 +166,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 0.57001 1.74506 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 0.569997275058291 1.7448638335884465 3.6100261997207355
+  rotation -0.999973872005023 0.002620333488632588 0.006737147741468325 -0.00014734985316662121
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -176,8 +177,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -2.78999 1.74511 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -2.790002729085103 1.7448638038400544 3.6100261746990374
+  rotation -0.9999733566907224 0.002810105267743695 0.006737152000185685 -0.00014734985751634012
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -187,8 +188,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -3.48999 1.74511 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -3.489992791375125 1.7448958331364168 3.609987507366444
+  rotation -0.603729177730437 -0.0025886051993872245 -0.7971852852882148 6.107364765267224e-05
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -198,8 +199,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -4.18999 1.74511 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -4.1900080583156 1.7448860316596206 3.6100249548517107
+  rotation -0.985860826844757 0.0004924454401640434 -0.16756547254867465 -0.00014303456558867385
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -209,8 +210,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 4.33001 1.21489 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 4.330015806629373 1.2149463070000075 3.619999077931071
+  rotation 0.1862076278125532 0.0012666543745421613 -0.9825096004269459 9.212757232206964e-05
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -220,8 +221,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 0.58001 1.21509 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 0.5799972035575431 1.214883079879575 3.621883375229651
+  rotation -0.904876546868371 -0.22775789553536788 -0.3596175412140976 5.21105917992531e-06
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -231,8 +232,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -2.77999 1.21522 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -2.7800027938294884 1.2148830242696511 3.6218833811662363
+  rotation -0.8991490401921163 -0.28647201458465 -0.3308546333080559 5.663423368433102e-06
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -242,8 +243,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 3.70001 1.21489 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 3.699996342349998 1.2149502638774188 3.6200068621714276
+  rotation -0.9991849395459035 -0.002240388794987111 -0.040304307991781876 -5.4254663167842546e-05
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -253,8 +254,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -0.09999 1.21507 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -0.09995956649264591 1.2148793026633864 3.6218138570893617
+  rotation -0.8510437390983586 0.0051652091366469295 -0.5250693999425787 0.0003973845188693688
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -264,8 +265,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -3.47999 1.21519 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -3.4799547486636135 1.2148774104221458 3.6218061540686706
+  rotation -0.8510149113950759 0.004714244222260101 -0.5251203638068551 0.00044116426179218555
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -275,8 +276,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -0.78999 1.21507 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -0.7900068421849323 1.2149436806703997 3.621877616121074
+  rotation -0.9933505377554925 -0.00047132748208661705 -0.11512813292709365 -0.00015120235130640423
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -286,8 +287,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -4.18999 1.21517 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -4.19000865237814 1.214939534147929 3.621878666618512
+  rotation -0.9862489735650568 -0.0004514221466215639 -0.16526572046228305 -0.00015747567165559756
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -297,8 +298,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 2.98001 1.21489 3.61998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 2.9799912311235843 1.2149394338454533 3.6200278513523676
+  rotation -0.9855256000687201 -0.0007902700386061982 -0.16952482733350566 -0.0001564291578178057
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -308,8 +309,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation 3.70001 1.74489 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation 3.700007762967583 1.7448953801592972 3.609986787562261
+  rotation -0.6211249612000485 0.002012831667528455 -0.7837089581489526 6.664412694449815e-05
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -319,8 +320,8 @@ Solid {
   physics USE box_phy
 }
 Solid {
-  translation -0.09999 1.74507 3.60998
-  rotation -0.7609361124847858 0.0013071918059874453 -0.6488254957738051 9.688394957870268e-05
+  translation -0.09999279061458109 1.7448958330895723 3.6099875067638396
+  rotation -0.6037299525569501 -0.002612156686960262 -0.7971846216674187 6.107394951771572e-05
   scale 0.7 0.7 0.7
   children [
     USE BOX
@@ -348,7 +349,7 @@ DEF FINAL_SHELF Solid {
                 baseColor 0.3921569 0.3921569 0.3921569
                 baseColorMap ImageTexture {
                   url [
-                    "textures/lightwood.jpg"
+                    "textures/desktop_wood.jpg"
                   ]
                 }
                 roughness 1
@@ -428,7 +429,7 @@ DEF FINAL_SHELF Solid {
                 baseColor 0.3921569 0.3921569 0.3921569
                 baseColorMap ImageTexture {
                   url [
-                    "textures/lightwood.jpg"
+                    "textures/desktop_wood.jpg"
                   ]
                 }
                 roughness 1
@@ -508,7 +509,7 @@ DEF FINAL_SHELF Solid {
                 baseColor 0.3921569 0.3921569 0.3921569
                 baseColorMap ImageTexture {
                   url [
-                    "textures/lightwood.jpg"
+                    "textures/desktop_wood.jpg"
                   ]
                 }
                 roughness 1
@@ -584,7 +585,8 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
+          appearance DEF COLOR PBRAppearance {
+            baseColor 1 0.15 0.15
             roughness 1
             metalness 0
             name "color_2829873"
@@ -624,11 +626,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -664,11 +662,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -704,11 +698,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -733,14 +723,6 @@ Solid {
   ]
   name "tinker.obj(2)"
 }
-shoefy_nav {
-  hidden translation_12 0.1999964316660326 2.090012409538145 0.32999979762943293
-  hidden rotation_12 -0.004861111372481537 -0.76534842175575 0.6435978269946279 3.261289235585093
-  hidden translation_13 -0.22000841307695382 2.0899918845077554 0.33001807878579686
-  hidden rotation_13 -0.4499429962123618 0.09766908072208737 -0.8877004285401383 2.8856079445324188
-  translation -2.77814 -2.04442 -3.59144
-  rotation -0.0006769148413677683 0.9999997656541343 -0.00010236197601188849 1.57028
-}
 Solid {
   translation 4.34 0.21 -2.01
   rotation 0 1 0 1.5708
@@ -752,11 +734,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -792,11 +770,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -832,11 +806,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -872,11 +842,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -912,11 +878,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -952,11 +914,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -992,11 +950,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1032,11 +986,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1072,11 +1022,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1102,7 +1048,7 @@ Solid {
   name "45.obj(10)"
 }
 Solid {
-  translation -5.95 0.21 1.1e-05
+  translation -5.25 0.21 5.85757e-06
   rotation 0 1 0 -3.1415853071795863
   scale 0.04 0.04 0.04
   children [
@@ -1112,11 +1058,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1152,11 +1094,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1192,11 +1130,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1232,11 +1166,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1272,11 +1202,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1312,11 +1238,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1352,11 +1274,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1392,11 +1310,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1432,11 +1346,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1472,11 +1382,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1512,11 +1418,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1551,11 +1453,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1590,11 +1488,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1630,11 +1524,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1670,11 +1560,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1710,11 +1596,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -1750,11 +1632,7 @@ Solid {
     Solid {
       children [
         Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-            name "color_2829873"
-          }
+          appearance USE COLOR
           geometry IndexedFaceSet {
             coord Coordinate {
               point [
@@ -2948,4 +2826,12 @@ RectangleArena {
   }
   wallThickness 0.3
   wallHeight 2.5
+}
+shoefy_line {
+  hidden translation_12 0.20000628737874274 2.0899902870907776 0.33000573575287934
+  hidden rotation_12 -0.9116711243492827 0.23889902484647543 0.3343396730199963 2.622951019519175
+  hidden translation_13 -0.22000302088579013 2.0899835452566924 0.3300135498799198
+  hidden rotation_13 0.4771185906461967 -0.19409158264399698 0.8571384415638676 3.8905813196272225
+  translation -2.10805 -2.04391 -3.37103
+  rotation 0.00010230897604909651 0.9999997658964168 -0.0006765648416137092 -1.571315307179586
 }
