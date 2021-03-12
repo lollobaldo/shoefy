@@ -1,0 +1,33 @@
+canvas {
+  margin-top: 20px;
+}
+.td {
+  text-align:center;
+}
+.tablebox{
+  border:0;
+  display:block;
+  width:100%; width:70px;
+  height:50px;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height:50px;
+}
+.clone {
+  display: none;
+}
+td {
+  border: 1px solid #bfbfbf !important;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,74 @@
+<html>
+
+  <head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magic.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/magic.js"></script>
+  </head>
+
+  <body>
+    <center>
+      <canvas id="canvas" width=700px height=500px>
+      </canvas>
+      <br>
+      <button id="add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add shelving unit...</button>
+      <button id="edit" type="button" class="btn btn-secondary" disabled>Edit shelving unit...</button>
+      <button id="remove" type="button" onclick="removeUnit()" class="btn btn-danger" disabled>Remove shelving unit</button>
+    </center>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Shelving Unit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+            This table represents the shelving unit you are adding, face on. Enter the shoe size that will be stored in each position, then click "Add unit". 
+            </p>
+            <table id="addTable" class="table table-bordered">
+
+              <tbody>
+                <tr class="clone">
+                  <td class="clone"><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                  <td><input type="number" class="tablebox" /></td>
+                </tr>
+                
+              </tbody>
+            </table>
+            <button type="button" onclick="addRow('addTable')" class="btn btn-info">+row</button>
+            <button type="button" onclick="removeRow('addTable')" class="btn btn-warning">-row</button>
+            <button type="button" onclick="addCol('addTable')" class="btn btn-info">+col</button>
+            <button type="button" onclick="removeCol('addTable')" class="btn btn-warning">-col</button>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="resetTable()" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addUnit()">Add unit</button>
+  </body>
+</html>
