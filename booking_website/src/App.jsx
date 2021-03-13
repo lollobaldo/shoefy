@@ -10,6 +10,7 @@ import Header from 'components/Header';
 import Home from 'components/Home';
 import Booking from 'components/Booking';
 import Details from 'components/Details';
+import Payment from 'components/Payment';
 import Confirmation from 'components/Confirmation';
 import PhoneScreen from 'components/PhoneScreen';
 
@@ -30,6 +31,9 @@ function App() {
             </Route>
             <Route path="/details/:time">
               <Details />
+            </Route>
+            <Route path="/payment/:time/:name">
+              <Payment />
             </Route>
             <Route path="/confirmation/:time/:name">
               <Confirmation />

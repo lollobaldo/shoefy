@@ -28,6 +28,9 @@ const Header = () => {
     case 'details':
       headingLine = 'Add your Details';
       break;
+    case 'payment':
+      headingLine = 'Pay';
+      break;
     case 'confirmation':
       headingLine = 'Your Confirmation';
       break;

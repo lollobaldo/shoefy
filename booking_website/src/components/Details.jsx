@@ -204,7 +204,7 @@ const Details = () => {
     if (!name) { setNameError(true); return; }
     if (!email) { setEmailError(true); return; }
     if (!size) { setSizeError(true); return; }
-    const newUrl = `/confirmation/${time}/${name}`;
+    const newUrl = `/payment/${time}/${name}`;
     console.log(newUrl);
     history.push(newUrl);
   };
