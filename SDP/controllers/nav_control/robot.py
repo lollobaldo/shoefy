@@ -52,13 +52,13 @@ def rotate():
             back()
             count += 1
         elif count == 5:
-            wheels[0].setVelocity(speed)
-            wheels[1].setVelocity(-speed)
+            wheels[0].setVelocity(speed/2)
+            wheels[1].setVelocity(-speed/2)
             if ir2 < 820:
                 count += 1
         elif count == 6:
-            wheels[0].setVelocity(speed)
-            wheels[1].setVelocity(-speed)
+            wheels[0].setVelocity(speed/2)
+            wheels[1].setVelocity(-speed/2)
             if ir2 > 820:
                 count += 1            
         else:
