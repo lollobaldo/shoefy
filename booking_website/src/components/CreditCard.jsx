@@ -167,7 +167,7 @@ const CreditCard = () => {
           onAnimationEnd={() => {}}>
           <TextInput
             style={{ display: 'inline-block', width: '60%' }}
-            name="expiry" label="Expiration dd/mm" type="text" pattern="\d\d/\d\d" maxLength="4" value={state.expiry}
+            name="expiry" label="Expiration dd/mm" type="text" pattern="\d\d\/\d\d" maxLength="5" value={state.expiry}
             onChange={handleInputChange} onFocus={handleInputFocus} />
           <TextInput
             style={{ display: 'inline-block', width: '30%', margin: '0 0 0 auto' }}
