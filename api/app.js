@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const QRCode = require('qrcode');
-
+const cors=require('cors');
 const port = 5432;
 
 
@@ -21,10 +21,15 @@ const userSchema = new mongoose.Schema({
 });
 const shoeSchema = new mongoose.Schema({
   shoeSize: Number,
+  unit: Number,
   row: Number,
   column: Number,
-  currentlyPresent: { type:Boolean, default: true }
+  currentlyPresent: { type:Boolean, default: true },
+  path: String
 })
+const layoutSchema = new mongoose.Schema({
+  data: String
+});
 const bookingSchema = new mongoose.Schema({
   email: { 
     type: String,
@@ -39,6 +44,7 @@ const bookingSchema = new mongoose.Schema({
   
 const Shoe = mongoose.model('Shoe',shoeSchema);
 const Booking = mongoose.model('Booking',bookingSchema);
+const Layout = mongoose.model('Layout',layoutSchema);
 
 const responses = { 
   email: {
@@ -65,7 +71,7 @@ app.use(function(req,res,next){
 });
 
 app.use(express.json());
-
+app.use(cors());
 app.get('/', (req, res) => {
   resp={ 'nosey-parker': true };
   return res.json(resp);
@@ -107,11 +113,32 @@ app.post('/booking', (req,res) => {
     });
 });
 
+
+app.post('/layout',(req,res)=>{
+  var l = new Layout({
+    data: req.body.layoutData
+  });
+  l.save();
+  req.body.shoes.forEach(shoe=>{
+    var s = new Shoe({
+      shoeSize:shoe.shoeSize,
+      row: shoe.row,
+      column:shoe.col,
+      unit:shoe.unit,
+      path:shoe.path,
+      currentlyPresent:true
+    });
+    s.save();
+  });
+  res.json(responses.ok);
+})
+
 app.post('/shoe',(req,res)=>{
   var s = new Shoe({
     shoeSize : req.body.shoeSize,
     row : req.body.row,
-    column:req.body.column
+    column:req.body.column,
+    unit: req.body.unit
   });
   s.save(err=>{
     if(err){
@@ -125,8 +152,8 @@ app.post('/shoe',(req,res)=>{
   });
 });
 
-app.delete('/shoe/:row/:column',(req,res)=>{
-  Shoe.findOneAndDelete({row:req.params.row,column:req.params.column},err=>{
+app.delete('/shoe/:unit/:row/:column',(req,res)=>{
+  Shoe.findOneAndDelete({unit:req.params.unit,row:req.params.row,column:req.params.column},err=>{
     if(err){
       res.status(404);
       res.json(responses.notFound);
@@ -137,8 +164,8 @@ app.delete('/shoe/:row/:column',(req,res)=>{
   });
 });
 
-app.get('/shoe/:row/:column',(req,res)=>{
-  Shoe.findOne({row: req.params.row, column: req.params.column},(err,shoe)=>{
+app.get('/shoe/:unit/:row/:column',(req,res)=>{
+  Shoe.findOne({unit:req.params.unit,row: req.params.row, column: req.params.column},(err,shoe)=>{
     if(shoe){
       res.status(200);
       res.json(shoe);
@@ -164,8 +191,38 @@ app.get('/shoes/:size',(req,res)=>{
   });
 });
 
-app.patch('/shoe/:row/:column',(req,res)=>{
-  s = Shoe.findOne({row:req.params.row,column:req.params.column},err=>{
+app.patch('/shoe/:unit/:row/:column/take',(req,res)=>{
+  toggleShoe(req,res,false)
+});
+app.patch('/shoe/:unit/:row/:column/replace',(req,res)=>{
+  toggleShoe(req,res,true);
+});
+
+function toggleShoe(req,res,operation){
+  s = Shoe.findOne({unit:req.params.unit,row:req.params.row,column:req.params.column},err=>{
+    if(err){                                  
+      res.status(404);                        
+      res.json(responses.server);             
+    }                                         
+  });                                         
+  if(!s){                                     
+    res.status(404);                          
+    res.json(responses.notFound);             
+  }        
+  s.currentlyPresent=operation;
+  s.save(err=>{
+    if(err){
+      res.status(500);
+      res.json(responses.server);
+    } else {
+      res.status(200);
+      res.json(responses.ok);
+    }
+
+  });
+}
+app.patch('/shoe/:unit/:row/:column',(req,res)=>{
+  s = Shoe.findOne({unit:req.params.unit,row:req.params.row,column:req.params.column},err=>{
     if(err){
       res.status(404);
       res.json(responses.server);
@@ -260,6 +317,19 @@ app.get('/booking/:id',(req,res)=>{
       res.json(b);
     }
   });
+});
+
+app.get('/shoe/:shoeSize/available',(req,res)=>{
+  Shoe.findOne({shoeSize:req.params.shoeSize,currentlyPresent:true},(err,shoe)=>{
+    if(shoe){
+      res.status(200);
+      res.json(shoe);
+    } else {
+      res.status(404);
+      res.json({penis:1});
+    }
+  });
+
 });
 
 app.get('/shoe/:shoeSize/available/:startTime/:endTime',async (req,res)=>{

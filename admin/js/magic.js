@@ -54,7 +54,7 @@ function init() {
   canvas.onmousemove = function(e) {
     e=getMousePos(canvas,e);
     mouseOn = getUnitMouseIsOn(e)
-    if(selectedIndex != -1) {
+    if(selectedIndex != -1 && leftMouseDown) {
       units[selectedIndex].x=e.x-units[selectedIndex].width/2;
       units[selectedIndex].y =e.y-units[selectedIndex].height/2;
     }
@@ -72,6 +72,7 @@ function init() {
     return false;
   }
   canvas.onmousedown = function(ev) {
+    leftMouseDown=!leftMouseDown;
     e = getMousePos(canvas,ev);
     mouseOn=getUnitMouseIsOn(e);
     if(ev.button==2){
@@ -93,31 +94,43 @@ function init() {
         }
       }
       return; 
-    }
-    if(selectedIndex>-1){
-      units[selectedIndex].selected = false;
-      units[selectedIndex].hovered = false;
-      selectedIndex = -1;
-      $('#remove').attr("disabled","true");
-    } else if(mouseOn>-1){
-      selectUnit(mouseOn);
-      units[mouseOn].hovered = false;
-      selectedIndex = mouseOn;
+    } else {
+      if(selectedIndex>-1){
+        units[selectedIndex].selected = false;
+        units[selectedIndex].hovered = false;
+        selectedIndex = -1;
+        $('#remove').attr("disabled","true");
+      } if(mouseOn>-1){
+        selectUnit(mouseOn);
+        units[mouseOn].hovered = false;
+        selectedIndex = mouseOn;
+      } else if(selectedIndex>-1) {
+        units[selectedIndex].selected=false;
+        units[selectedIndex].hovered=true;
+        selectedIndex=-1
+      }
     }
   }
+
   canvas.onmouseup = function(e){
-    if(e.button==2){
-      return false;
-    }
-    e = getMousePos(canvas,e);
-    mouseOn = getUnitMouseIsOn(e);
-    if((mouseOn == selectedIndex)&&selectedIndex>-1) {
-      units[selectedIndex].selected = false;
-      units[selectedIndex].hovered = false;
-      selectedIndex=-1;
-      $('#remove').attr('disabled',"true");
+    if(e.button==0){
+      leftMouseDown=false;
     }
   }
+  /*
+     if(e.button==2){
+     return false;
+     }
+     e = getMousePos(canvas,e);
+     mouseOn = getUnitMouseIsOn(e);
+     if((mouseOn == selectedIndex)&&selectedIndex>-1) {
+     units[selectedIndex].selected = false;
+     units[selectedIndex].hovered = false;
+     selectedIndex=-1;
+     $('#remove').attr('disabled',"true");
+     }
+     }
+     */
 
   return setInterval(update, 10);
 }
@@ -146,6 +159,8 @@ function draw() {
   rect(0,0,WIDTH,HEIGHT);
 
   units.forEach(unit=>{
+    unit.newPath=""
+    unit.lines=[]
     if(unit.selected){
       ctx.fillStyle="#999";
     } else if(unit.hovered) {
@@ -165,7 +180,7 @@ function draw() {
     if(unit.pixel==0){
       np = [p[0],p[1]+20];
       ctx.lineTo(np[0],np[1]);
-      moveDown(np,g,ctx);
+      moveDown(np,g,ctx,unit);
 
       ctx.moveTo(p[0],p[1]+20);
       for(var c=1;c<unit.cols;c++){
@@ -178,9 +193,9 @@ function draw() {
       np = [p[0]+20,p[1]];
       ctx.lineTo(np[0],np[1]);
       if(np[0]-g[0]<0){
-        moveRight(np,g,ctx);
+        moveRight(np,g,ctx,unit);
       } else {
-        moveDown(np,g,ctx);
+        moveDown(np,g,ctx,unit);
       }
 
       ctx.moveTo(p[0]+20,p[1]);
@@ -194,9 +209,9 @@ function draw() {
       np = [p[0]-20,p[1]]
       ctx.lineTo(np[0],np[1]);
       if((np[0]-g[0]>0)){
-        moveLeft(np,g,ctx)
+        moveLeft(np,g,ctx,unit)
       } else {
-        moveDown(np,g,ctx)
+        moveDown(np,g,ctx,unit)
       }
 
       ctx.moveTo(p[0]-20,p[1]);
@@ -205,21 +220,24 @@ function draw() {
         ctx.lineTo(p[0],p[1]+30*c);
         ctx.moveTo(p[0]-20,p[1]+30*c);
       }
-
-
+      
+    }
+    if(!(unit.newPath==unit.path)){
+      unit.path=unit.newPath;
     }
 
     ctx.moveTo(g[0],g[1])
     ctx.lineTo(g[0],g[1]+50)
     ctx.stroke();
   })
+  units.forEach(u=>{checkStraights(u)});
 
 
   ctx.fillStyle = "#0e0";
   rect(340,480,20,20);
 }
 lines = [] 
-function moveDown(np,g,ctx){
+function moveDown(np,g,ctx,u){
   if(np[1]<g[1]){
     nnp = [np[0],g[1]]
     k=checkAllIntersect([np,nnp])
@@ -229,33 +247,71 @@ function moveDown(np,g,ctx){
       }
 
     }
+    u.newPath+=calcDirection(np,nnp);
+    u.lines.push([np,nnp]);
     lines.push([np,nnp]);
     ctx.lineTo(nnp[0],nnp[1]);
-
     if(np[0]>g[0]){
-      moveLeft(nnp,g,ctx)
+      moveLeft(nnp,g,ctx,u)
     } else if(np[0]<g[0]) {
-      moveRight(nnp,g,ctx)
+      moveRight(nnp,g,ctx,u)
     }
   }
 }
-function moveLeft(np,g,ctx){
+function calcDirection(np,nnp){
+  dire=""
+  already=[]
+  if(np[1]<nnp[1]){
+    dire+="D"
+  } else if (np[0]<nnp[0]){
+    dire+="R"
+  } else if (np[0]>nnp[0]){
+    dire+="L"
+  }
+  return dire;
+}
+String.prototype.insert_at=function(index, string)
+{   
+  return this.substr(0, index) + string + this.substr(index);
+}
+function checkStraights(u){
+  sO=0;
+  for(i=0;i<u.lines.length;i++){
+    cl = u.lines[i]
+    lines.forEach(l=>{
+      if(!(JSON.stringify(l)==JSON.stringify(cl))){
+        xn=0
+        left=0;
+        if(u.path[i+sO]=="D"){
+          xn=1
+        } else if(u.path[i+sO]=="L"){
+          left=1
+        }
+        if((((l[1][xn]>cl[0][xn]&&l[1][xn]<cl[1][xn])&&!left)||((l[1][xn]<cl[0][xn]&&l[1][xn]>cl[1][xn])&&left))&&(l[1][~xn+2]==cl[1][~xn+2])){
+          u.path=u.path.insert_at(i+sO+1,'S');
+          sO++;
+        }
+
+      }
+    })
+  }
+}
+function moveLeft(np,g,ctx,u){
   nnp = [g[0],np[1]]
   k=checkAllIntersect([np,nnp],xcheck=true)
   if(k!=-1){
     nnp = [k,np[1]]
   }
+  u.newPath+=calcDirection(np,nnp);
+  u.lines.push([np,nnp]);
   lines.push([np,nnp]);
   ctx.lineTo(nnp[0],nnp[1])
   if(np[1]<g[1]){
-    moveDown(nnp,g,ctx)
+    moveDown(nnp,g,ctx,u)
   }
 }
-function moveRight(np,g,ctx){
-  moveLeft(np,g,ctx)
-}
-function det(a,b){
-  return a[0]*b[1]-a[1]*b[0]
+function moveRight(np,g,ctx,u){
+  moveLeft(np,g,ctx,u)
 }
 function checkAllIntersect(l1,xcheck){
   outs=[]
@@ -347,46 +403,65 @@ function addUnit(){
     })
     unit.push(curRow)
   });
-  units.push({rows: unit.length, cols: unit[0].length, width: unit[0].length*30, height: 30, x: 300, y: 400, selected: true, hovered: false, pixel:0, shoes: unit});
+  units.push({rows: unit.length, cols: unit[0].length, width: unit[0].length*30, height: 30, x: 300, y: 400, selected: true, hovered: false, pixel:0, shoes: unit, path:'', newPath:'',lines:[]});
+  if(selectedIndex>-1){
+    units[selectedIndex].selected=false;
+  }
   selectUnit(units.length-1)
+  leftMouseDown=true;
   resetTable();
 }
 
+function submitUnits(){
+  LayoutData = JSON.stringify(units);
+  Shoes=[]
+  units.forEach((unit,i)=>{
+    path=""
+    // yes i know this won't work when its on the other half of the screen
+    // shut the fuck up lalalalalalalalala i can't hear you
+    // ok fine i'll fix it next commit i swear
+    if(unit.path.slice(-1)!='D'&&unit.path.slice(-1)!='S'){
+      path+='S'
+    }
+    lastC='S'
+    for(const c of unit.path.split("").reverse().join("")){
+      if(c=='L'){
+        path+='R'
+      } else if(c=='R'){
+        path+='L'
+      } else if(c=='D'){
+        path+=lastC;
+      }
+      if(c!='S'){
+        lastC=c
+      }
+    }
+    unit.shoes.forEach((row,j)=>{
+      row.forEach((col,k)=>{
+        p=path.slice();
+        //if(unit.pixel==0){
+          if(k==0){
+            p+="S";
+          } else {
+            p+="R"+"S".repeat(k-1)+"L";
+          }
+        //} else if(unit.pixel==1) {
+        //  if(k==0){
+        //    
+        // }
+        //}
+        Shoes.push({unit:i,row:j,col:k,shoeSize:col,path:p})
+      })
+    })
+  })
+  fetch('https://api.shoefy.xereeto.co.uk/layout',{
+    headers:{ "Content-Type": "application/json; charset=utf-8" },
+    method:'POST',
+    body:JSON.stringify({
+      layoutData: LayoutData,
+      shoes: Shoes
+    })
+  });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
