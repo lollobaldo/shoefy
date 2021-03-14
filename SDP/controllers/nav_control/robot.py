@@ -9,6 +9,9 @@ ir = []
 wheels = []
 TIME_STEP = 64
 speed = 10
+ROBOT_IP='127.0.0.1'
+ROBOT_PORT=1337
+BUFFER_SIZE=20
 
 def initialize(robot):   
 		irNames = ['irR', 'irM', 'irL']
@@ -134,14 +137,8 @@ def run(robot, order):
 								tl = True
 						else:
 								forward()
-ROBOT_IP='127.0.0.1'
-ROBOT_PORT=1337
-BUFFER_SIZE=20
-if __name__ == '__main__':
-		robot = Robot()
-		initialize(robot)
-		speed=10
-		
+
+def getOrder():
 		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		s.bind((ROBOT_IP,ROBOT_PORT))
 		s.listen(1)
@@ -162,6 +159,13 @@ if __name__ == '__main__':
 			#accidentally added an extra S on the front will need to delete
 			order.pop(0)
 		conn.close
+		return order
+
+if __name__ == '__main__':
+		robot = Robot()
+		initialize(robot)
+		#speed = 10
+		order = getOrder()
 		#order = [1,2,2,2,0,3] #instructions for every intersections
 		#
 		run(robot, order)
