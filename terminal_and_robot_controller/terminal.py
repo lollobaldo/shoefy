@@ -4,6 +4,9 @@ import json
 import cv2
 from shoefyAPI import shoefy
 import socket
+import pathlib
+workdir=str(pathlib.Path(__file__).parent.absolute())
+print(workdir)
 
 ROBOT_IP = '127.0.0.1'
 ROBOT_PORT=1337
@@ -19,7 +22,7 @@ def readQr(image):
     if bbox is not None:
         return data
 
-bookingData = s.getBooking(readQr(cv2.imread("sampleQR.png")))
+bookingData = s.getBooking(readQr(cv2.imread(workdir+"/sampleQR.png")))
 # check for time and date goes here
 
 print("Email: "+bookingData['email'])
