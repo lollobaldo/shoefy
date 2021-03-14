@@ -167,7 +167,6 @@ if __name__ == '__main__':
 		#speed = 10
 		order = getOrder()
 		#order = [1,2,2,2,0,3] #instructions for every intersections
-		#
 		run(robot, order)
 		rotate()
 		run(robot, reverse(order))
