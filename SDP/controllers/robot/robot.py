@@ -103,7 +103,6 @@ if __name__ == '__main__':
     pull_box(1.2)
 
     r.rotate(robot)
-
-    drop_box(1.2)
     
     r.run(robot, r.reverse(order))
+    drop_box(1.2)
