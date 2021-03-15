@@ -146,8 +146,8 @@ def getOrder():
 		order=[]
 		recvd=False
 		while not recvd:
-  		data = conn.recv(BUFFER_SIZE)
-  		if not data: break
+  			data = conn.recv(BUFFER_SIZE)
+  			if not data: break
   		print "received data:", data
 			
   		conn.send(data)  # echo
