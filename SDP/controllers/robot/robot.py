@@ -94,15 +94,20 @@ def drop_box(box_height):
         lift.to_height(1)
         pulling_device.on_event("box_returned")
 
-
 if __name__ == '__main__':
     r.initialize(robot)
-    order = [0,1,1,2,3]
-    r.run(robot, order)
+    run = True
+    while run:
+        order = r.getOrder()#[0,1,1,2,3]
+        if len(order)==0:
+            run = False
+            break
+        r.run(robot, order)
 
-    pull_box(1.2)
+        pull_box(1.2)
 
-    r.rotate(robot)
+        r.rotate(robot)
     
-    r.run(robot, r.reverse(order))
-    drop_box(1.2)
+        r.run(robot, r.reverse(order))
+        drop_box(1.2)
+        r.rotate(robot)

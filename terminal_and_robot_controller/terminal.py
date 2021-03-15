@@ -1,12 +1,13 @@
 # this will eventually use GTK to display a graphical interface, but I'm developing on Windows and it's not behaving for me
 
 import json
+import sys
 import cv2
 from shoefyAPI import shoefy
 import socket
-import pathlib
-workdir=str(pathlib.Path(__file__).parent.absolute())
-print(workdir)
+#import pathlib
+#workdir=str(pathlib.Path(__file__).parent.absolute())
+#print(workdir)
 
 ROBOT_IP = '127.0.0.1'
 ROBOT_PORT=1337
@@ -22,7 +23,7 @@ def readQr(image):
     if bbox is not None:
         return data
 
-bookingData = s.getBooking(readQr(cv2.imread(workdir+"/sampleQR.png")))
+bookingData = s.getBooking(readQr(cv2.imread(sys.argv[1])))#workdir+"/sampleQR.png")))
 # check for time and date goes here
 
 print("Email: "+bookingData['email'])
@@ -30,10 +31,10 @@ paths=[]
 for size in bookingData['shoeSizes']:
 	sd=s.getAvailShoe(size);
 	paths.append(sd['path']);
-	print(s.takeShoe(sd['unit'],sd['row'],sd['column']));
-	print(s.getShoe(sd['unit'],sd['row'],sd['column']));
+	s.takeShoe(sd['unit'],sd['row'],sd['column']);
+	shoe=s.getShoe(sd['unit'],sd['row'],sd['column']);
+	print("Shoe size: ", shoe['shoeSize'], "\nUnit:",shoe['unit'],"\nColumn:",shoe['column'],"\nRow:", shoe['row'])
 	s.replaceShoe(sd['unit'],sd['row'],sd['column']);
-	print(s.getShoe(sd['unit'],sd['row'],sd['column']));
 
 print(paths)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -41,7 +42,7 @@ s.connect((ROBOT_IP, ROBOT_PORT))
 for path in paths:
 		s.send(bytes(path,encoding='utf8'))
 		data=s.recv(BUFFER_SIZE)
-		print(data)
+		print('Robot received command successfully.')
 s.close()
 	
 # then get the shoe size

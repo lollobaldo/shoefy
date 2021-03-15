@@ -2,6 +2,7 @@ from controller import Robot
 import movement as mv
 import math
 import sys
+import socket
 
 ir = []
 wheels = []
@@ -134,28 +135,34 @@ def run(robot, order):
                 tl = True
             else:
                 forward()
-'''
 def getOrder():
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.bind((ROBOT_IP,ROBOT_PORT))
-	s.listen(1)
-	conn, addr = s.accept()
-	order=[]
-	recvd=False
-	while not recvd:
-  		data = conn.recv(BUFFER_SIZE)
-  		if not data: break			
-  	conn.send(data)  # echo
-	recvd=True
-	for letter in data.decode('utf-8'):
-		if letter=='S': order.append(2)
-		elif letter=='L': order.append(0)
-		else: order.append(1)
-		#accidentally added an extra S on the front will need to delete
-	order.pop(0)
-    conn.close
-	return order'''
-
+  
+  print('Waiting for order...')
+  
+  #return [0,1,1,2,3]
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  s.bind((ROBOT_IP,ROBOT_PORT))
+  s.listen(1)
+  conn, addr = s.accept()
+  order=[]
+  recvd=False
+  while not recvd:
+    data = conn.recv(BUFFER_SIZE)
+    if not data: break
+    conn.send(data)  # echo
+    print('ORDER RECEIVED: '+str(data))
+    recvd=True
+  cmd=data.decode('utf-8')
+  if(cmd=="END"):
+    return []
+  for letter in cmd:
+    if letter=='S': order.append(2)
+    elif letter=='L': order.append(0)
+    else: order.append(1)
+  order.append(3)
+  print('string generated: ',order)
+  conn.close()
+  return order
 if __name__ == '__main__':
     robot = Robot()
     initialize(robot)
