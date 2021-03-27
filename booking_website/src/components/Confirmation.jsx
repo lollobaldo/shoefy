@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
@@ -46,7 +46,7 @@ const QRWrapper = styled.div`
 `;
 
 const Confirmation = () => {
-  const { name, time } = useParams();
+  const { name, time, size } = useParams();
   const bookingDate = Date.parse(time);
   const dateFormat = new Intl.DateTimeFormat('en', {
     weekday: 'long',
@@ -58,6 +58,22 @@ const Confirmation = () => {
     hour: 'numeric',
     minute: 'numeric',
   });
+
+  useEffect(() => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.shoefy.xereeto.co.uk/booking/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    const payload = JSON.stringify({
+      startTime: (+bookingDate / 1000).toFixed(0),
+      endTime: (+bookingDate / 1000).toFixed(0) + 3600,
+      name,
+      size,
+    });
+    console.log(payload);
+    xhr.send(payload);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const bookingString = `${dateFormat.format(bookingDate)} at ${timeFormat.format(bookingDate)}`;
   return (
     <BigContainer>
