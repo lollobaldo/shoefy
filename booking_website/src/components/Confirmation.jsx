@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
@@ -38,6 +38,7 @@ const SkaterPic = styled.div`
 
 const QRWrapper = styled.div`
   width: 100%;
+  height: 250px;
   background: #fff;
   display: flex;
   align-items: center;
@@ -47,6 +48,7 @@ const QRWrapper = styled.div`
 
 const Confirmation = () => {
   const { name, time, email, size } = useParams();
+  const [qr, setQr] = useState();
   const bookingDate = Date.parse(time);
   const dateFormat = new Intl.DateTimeFormat('en', {
     weekday: 'long',
@@ -60,19 +62,26 @@ const Confirmation = () => {
   });
 
   useEffect(() => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://api.shoefy.xereeto.co.uk/booking/', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    const payload = JSON.stringify({
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('POST', 'https://api.shoefy.xereeto.co.uk/booking/', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    const payload = {
       startTime: Math.floor(bookingDate / 1000),
       endTime: Math.floor(bookingDate / 1000) + 3600,
       name,
       email,
       shoeSizes: [+size],
-    });
+    };
     console.log(payload);
-    console.log(xhr);
-    xhr.send(payload);
+    // console.log(xhr);
+    // xhr.send(payload);
+    fetch('https://api.shoefy.xereeto.co.uk/booking/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.qr);
+        setQr(data.qr);
+      }).catch((err) => console.log(err));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -84,7 +93,10 @@ const Confirmation = () => {
       </SummaryP>
       <SkaterPic src={BG} />
       <QRWrapper>
-        <QRCode value={time} />
+        {/* {qr} */}
+        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(qr)}`} alt="qr code" style={{ height: '200px' }} />
+        {/* <img src={qr} alt="qr code" /> */}
+        {/* <QRCode value={time} /> */}
       </QRWrapper>
     </BigContainer>
   );
