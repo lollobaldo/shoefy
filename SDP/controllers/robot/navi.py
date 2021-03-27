@@ -2,9 +2,9 @@ from controller import Robot
 import movement as mv
 import math
 import sys
-import socket
 
 ir = []
+ds = []
 wheels = []
 TIME_STEP = 64
 speed = 10
@@ -23,27 +23,32 @@ def initialize(robot):
         wheels.append(robot.getDevice(wheelsNames[i]))
         wheels[i].setPosition(float('inf'))
         wheels[i].setVelocity(0.0)
+
+    dsNames = ['dsR', 'dsL']
+    for i in range(len(dsNames)):
+        ds.append(robot.getDevice(dsNames[i]))
+        ds[i].enable(TIME_STEP)
         
 
 def forward():
-    wheels[0].setVelocity(speed)
-    wheels[1].setVelocity(speed)
+    wheels[0].setVelocity(-speed)
+    wheels[1].setVelocity(-speed)
 
 def stop():
     wheels[0].setVelocity(0)
     wheels[1].setVelocity(0)
 
 def left():
-    wheels[0].setVelocity(speed)
+    wheels[0].setVelocity(-speed)
     wheels[1].setVelocity(0)
 
 def right():
     wheels[0].setVelocity(0)
-    wheels[1].setVelocity(speed)
+    wheels[1].setVelocity(-speed)
 
 def back():
-    wheels[0].setVelocity(-speed)
-    wheels[1].setVelocity(-speed)
+    wheels[0].setVelocity(speed)
+    wheels[1].setVelocity(speed)
 
 def rotate(robot):
     count = 0
@@ -53,13 +58,13 @@ def rotate(robot):
             back()
             count += 1
         elif count == 5:
-            wheels[0].setVelocity(speed/2)
-            wheels[1].setVelocity(-speed/2)
+            wheels[0].setVelocity(-speed/2)
+            wheels[1].setVelocity(speed/2)
             if ir2 < 830:
                 count += 1
         elif count == 6:
-            wheels[0].setVelocity(speed/2)
-            wheels[1].setVelocity(-speed/2)
+            wheels[0].setVelocity(-speed/2)
+            wheels[1].setVelocity(speed/2)
             if ir2 > 830:
                 count += 1            
         else:
@@ -74,8 +79,23 @@ def reverse(order):
             ans.append(2)
         else:
             ans.append((order[n-i-2] + 1) % 2)
-    ans.append(3)
+    ans.append(4)
     return ans
+
+def align(ds0, ds1):
+    print(ds0, ds1)
+    if ds0 < 700 and ds0 < 700:
+        stop()
+        return True
+    elif ds0 > ds1: 
+        wheels[0].setVelocity(-speed/2)
+        wheels[1].setVelocity(speed/2)
+    elif ds1 > ds0:
+        wheels[0].setVelocity(speed/2)
+        wheels[1].setVelocity(-speed/2)
+    else:
+        forward()
+    return False
         
 def run(robot, order):
     tl = False
@@ -85,17 +105,17 @@ def run(robot, order):
     if len(order) == 0:
         return
     while robot.step(TIME_STEP) != -1:
+        ds0 = ds[0].getValue()
+        ds1 = ds[1].getValue()
         ir0 = ir[0].getValue()
         ir1 = ir[1].getValue()
         ir2 = ir[2].getValue()
         turnR = ir0 < 830
         turnL = ir2 < 830
         junction = ir1 < 620
-        #print('left:{}'.format(ir2)) 
-        #print('m:{}'.format(ir1))
-        #print('right:{}'.format(ir0))
-        #print(count)
-        
+
+        if not junction and (ds0 < 1000 or ds1 < 1000):
+            stop()
         if intersection:
             if order[count] == 0:
                 left()
@@ -110,10 +130,13 @@ def run(robot, order):
                     right()
                 else:
                     forward()
+            elif order[count] == 3:
+                if align(ds0, ds1):
+                    break
             else:
                 stop()
                 break
-            if not turnL and not turnR:
+            if not turnL and not turnR and order[count] != 3:
                 intersection = False
                 count += 1
         elif junction:
@@ -135,34 +158,28 @@ def run(robot, order):
                 tl = True
             else:
                 forward()
+'''
 def getOrder():
-  
-  print('Waiting for order...')
-  
-  #return [0,1,1,2,3]
-  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-  s.bind((ROBOT_IP,ROBOT_PORT))
-  s.listen(1)
-  conn, addr = s.accept()
-  order=[]
-  recvd=False
-  while not recvd:
-    data = conn.recv(BUFFER_SIZE)
-    if not data: break
-    conn.send(data)  # echo
-    print('ORDER RECEIVED: '+str(data))
-    recvd=True
-  cmd=data.decode('utf-8')
-  if(cmd=="END"):
-    return []
-  for letter in cmd:
-    if letter=='S': order.append(2)
-    elif letter=='L': order.append(0)
-    else: order.append(1)
-  order.append(3)
-  print('string generated: ',order)
-  conn.close()
-  return order
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.bind((ROBOT_IP,ROBOT_PORT))
+	s.listen(1)
+	conn, addr = s.accept()
+	order=[]
+	recvd=False
+	while not recvd:
+  		data = conn.recv(BUFFER_SIZE)
+  		if not data: break			
+  	conn.send(data)  # echo
+	recvd=True
+	for letter in data.decode('utf-8'):
+		if letter=='S': order.append(2)
+		elif letter=='L': order.append(0)
+		else: order.append(1)
+		#accidentally added an extra S on the front will need to delete
+	order.pop(0)
+    conn.close
+	return order'''
+
 if __name__ == '__main__':
     robot = Robot()
     initialize(robot)

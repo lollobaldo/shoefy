@@ -13,19 +13,19 @@ import navi as r
 # create the Robot instance.
 robot = Robot()
 #use keyboard as input for display
-kb = robot.getKeyboard()
-kb.enable(10)
+
 
 
 # get the time step of the current world.
-timestep = 64
-
+timestep = int(robot.getBasicTimeStep())
+kb = robot.getKeyboard()
+kb.enable(timestep)
 # set the arm for pulling
 armMotor = robot.getDevice('l5')
 arm = arm.Arm(armMotor)
 arm.sensor.enable(timestep)
 grabConnector = robot.getDevice('connector')
-grabConnector.enablePresence(timestep)
+grabConnector.enablePresence(10)
 
 # connector magnetic distance is 3.3m
 
@@ -47,67 +47,85 @@ arm.inside()
 
 
 def pull_box(box_height):
-    if pulling_device.state.id == "free_Arm":
-        arm.out()
-        lift.to_height(box_height)
+    begin_time = robot.getTime()
 
-        if arm.isOut(box_height) and box_height != 1:
+    if pulling_device.state.id == "free_Arm" :
 
-            pulling_device.on_event('picking')
-            print("ready to pick")
-        else:
-            print("not ready to pick")
+
+        while robot.step(timestep) != -1:
+            while (robot.getTime() - begin_time) < 300:
+                break
+            if not arm.isOut():
+                #print("not ready to pick")
+                arm.out()
+                lift.to_height(box_height)
+            else:
+                pulling_device.on_event('picking')
+                #print("ready to pick")
+                break
+
+
+
     if pulling_device.state.id == "Picking":
 
-        print(str(grabConnector.getPresence))
-        if grabConnector.getPresence() == 1:
-            grabConnector.lock()
-            pulling_device.on_event("device_locked")
-            print("This robot find a connector")
-        else:
-            print("finding box")
+        while robot.step(timestep) != -1:
+            if grabConnector.getPresence() == 1:
+                grabConnector.lock()
+                pulling_device.on_event("device_locked")
+                print("This robot find a connector")
+                break
+            #else:
+                #print("finding box")
+
     # If the box is locked with the robot then place it on plane and get ready to move
     if pulling_device.state.id == "LockedState":
-        arm.inside()
-        pulling_device.on_event("to_movingMode")
+
+        while robot.step(timestep) != -1:
+            arm.inside()
+            if arm.isInside():
+                pulling_device.on_event("to_movingMode")
+                break
+            print("box is stucked")
 
     # Set the robot to default height for stable moving demands
     if pulling_device.state.id == "moving_mode":
 
-        lift.to_height(1)
-        if arm.isOut(box_height):
-            pass
-        # else:
-        #    print("The box is stuck")
+        lift.going_down(1)
+        print("ready to go")
 
 
 def drop_box(box_height):
 
     if pulling_device.state.id == "Reloading":
 
-        box_height += 0.05
-        if arm.isOut(box_height) and grabConnector.isLocked():
+        box_height += 0.02
+        lift.go(box_height)
+        if  grabConnector.isLocked():
             arm.out()
-            print('B is pressed for reloading box ')
-            grabConnector.unlock()
-            arm.inside()
-        lift.to_height(1)
-        pulling_device.on_event("box_returned")
+            print("press p to display reloading box")
+            if arm.isOut():
+                grabConnector.unlock()
+                arm.inside()
+                lift.going_down(1)
+                pulling_device.on_event("box_returned")
+        else:
+            print("The box is dropped on the floor")
+
+
 
 if __name__ == '__main__':
     r.initialize(robot)
-    run = True
-    while run:
-        order = r.getOrder()#[0,1,1,2,3]
-        if len(order)==0:
-            run = False
-            break
-        r.run(robot, order)
+    order = [0,1,2,3]
+    r.run(robot, order)
+    #face the shelves
+    print("start pulling")
+    #level2 = 1.68
+    #pull_box(1.68)
+    #turn robot back
+    r.rotate(robot)
 
-        pull_box(1.2)
 
-        r.rotate(robot)
+
     
-        r.run(robot, r.reverse(order))
-        drop_box(1.2)
-        r.rotate(robot)
+    r.run(robot, r.reverse(order))
+    
