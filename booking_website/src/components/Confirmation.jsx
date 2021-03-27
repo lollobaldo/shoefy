@@ -46,7 +46,7 @@ const QRWrapper = styled.div`
 `;
 
 const Confirmation = () => {
-  const { name, time, size } = useParams();
+  const { name, time, email, size } = useParams();
   const bookingDate = Date.parse(time);
   const dateFormat = new Intl.DateTimeFormat('en', {
     weekday: 'long',
@@ -64,12 +64,14 @@ const Confirmation = () => {
     xhr.open('POST', 'https://api.shoefy.xereeto.co.uk/booking/', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     const payload = JSON.stringify({
-      startTime: (+bookingDate / 1000).toFixed(0),
-      endTime: (+bookingDate / 1000).toFixed(0) + 3600,
+      startTime: Math.floor(bookingDate / 1000),
+      endTime: Math.floor(bookingDate / 1000) + 3600,
       name,
-      size,
+      email,
+      shoeSizes: [+size],
     });
     console.log(payload);
+    console.log(xhr);
     xhr.send(payload);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

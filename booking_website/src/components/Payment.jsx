@@ -31,10 +31,10 @@ const Submit = styled.button`
 
 const Details = () => {
   const history = useHistory();
-  const { time, name, size } = useParams();
+  const { time, name, email, size } = useParams();
 
   const submit = () => {
-    const newUrl = `/confirmation/${time}/${name}/${size}`;
+    const newUrl = `/confirmation/${time}/${name}/${email}/${size}`;
     console.log(newUrl);
     history.push(newUrl);
   };

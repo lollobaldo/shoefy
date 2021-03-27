@@ -32,10 +32,10 @@ function App() {
             <Route path="/details/:time">
               <Details />
             </Route>
-            <Route path="/payment/:time/:name/:size">
+            <Route path="/payment/:time/:name/:email/:size">
               <Payment />
             </Route>
-            <Route path="/confirmation/:time/:name/:size">
+            <Route path="/confirmation/:time/:name/:email/:size">
               <Confirmation />
             </Route>
             <Route path="/">
