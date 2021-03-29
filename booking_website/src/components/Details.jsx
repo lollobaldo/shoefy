@@ -209,7 +209,7 @@ const Details = () => {
     console.log(email, name, size);
     if (!name) { setNameError(true); return; }
     if (!email) { setEmailError(true); return; }
-    if (!size) { setSizeError(true); return; }
+    if (size === '') { setSizeError(true); return; }
     const newUrl = `/payment/${time}/${name}/${email}/${size}`;
     console.log(newUrl);
     history.push(newUrl);
