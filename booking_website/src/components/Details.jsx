@@ -123,11 +123,17 @@ const SizeCont = styled.div`
 // eslint-disable-next-line react/prop-types
 const SizeComp = ({ selected, onChange }) => {
   const items = [];
-  for (let size = 1; size <= 15; size += 1) {
+  for (let size = 1; size <= 14; size += 1) {
     items.push(size);
   }
   return (
     <SizeCont>
+      <SizeBtn
+        className={selected === 0 ? 'active' : 'cc'}
+        key={0} type="button"
+        onClick={() => onChange(0)}>
+        NA
+      </SizeBtn>
       {items.map((size) => (
         <SizeBtn
           className={size === selected ? 'active' : 'cc'}

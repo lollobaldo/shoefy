@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
-import QRCode from 'qrcode.react';
+// import QRCode from 'qrcode.react';
 
 import BG from 'res/try3.png';
 
