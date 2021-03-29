@@ -84,7 +84,7 @@ def reverse(order):
 
 def align(ds0, ds1):
     print(ds0, ds1)
-    if ds0 < 700 and ds0 < 700:
+    if ds0 <800 and ds0 < 800:
         stop()
         return True
     elif ds0 > ds1: 
@@ -113,9 +113,6 @@ def run(robot, order):
         turnR = ir0 < 830
         turnL = ir2 < 830
         junction = ir1 < 620
-
-        if not junction and (ds0 < 1000 or ds1 < 1000):
-            stop()
         if intersection:
             if order[count] == 0:
                 left()
@@ -158,6 +155,8 @@ def run(robot, order):
                 tl = True
             else:
                 forward()
+        if not junction and (ds0 < 1000 or ds1 < 1000):
+            stop()
 '''
 def getOrder():
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

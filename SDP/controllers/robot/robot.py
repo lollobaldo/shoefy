@@ -120,7 +120,7 @@ if __name__ == '__main__':
     #face the shelves
     print("start pulling")
     #level2 = 1.68
-    #pull_box(1.68)
+    pull_box(1.7)
     #turn robot back
     r.rotate(robot)
 
