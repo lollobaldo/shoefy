@@ -132,23 +132,37 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h2 id="concept">Concept</h2>
-<p>Summarise what your system does, its target market and uses cases here</p>
-<h3 id="functionality">Functionality</h3>
-<p>What features does your system have? Why should a viewer/investor be interested?</p>
-<h2 id="videosimagesinteractive-interfaces">Videos/Images/Interactive Interfaces</h2>
-<p>Throughout this page, you should add videos/interactive apps/images to your sections if available/appropriate</p>
-<p>Examples:</p>
-<p>Link to youtube video</p>
-<iframe width="764" height="430" src="https://www.youtube.com/embed/_sBBaNYex3E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-<p>Link embedded video from source</p>
-<video width="764" height="430" controls>
-  <source src="videos/test_video_atlas.mp4" type="video/mp4">
-</video>
-<h2 id="market-research">Market Research</h2>
-<p>Add any market research you&rsquo;ve done to this page</p>
-<h2 id="potential-for-future-development">Potential for Future Development</h2>
-<p>What features could you add to your system? How could you change it to reach new people/adapt to new</p>
+        <h2 id="concept">1. Concept</h2>
+        <p>Shoefy  is  a  sport-equipment  fetching  robot, specifically  designed  to  assist  with  ice  skates booking and distribution at ice rinks. It comes with an interface for reservation making and storage traking and an admin panel where the robot's path and environment are set. The system also includes a disinfecting mechanism and a foot measurer which can be used by users that do not know the correct size of their feet. Shoefy is really flexible when it comes to the environment so the product could be suitable for other simillar alleys such as bowling ones.</p>
+        <p class="milestone-info"> However, Shoefy's most notable asset is the fact that it removes the need of an on-desk employee and reduces the human contact which is extremely important today. What's more, Shoefy's booking and storage system will almost completely reduce the overcrowding around the rinks as the ice skating enthusiasts will be able to constantly keep track of the availablitlity.</p>
+        <p class="new-line">&nbsp;</p>
+        <img src="images/shoefy-box-full.jpg">
+        <h3> 1.1. Valuation proposal </h3>
+        <video width="764" height="430" controls>
+          <source src="videos/proposal.mp4" type="video/mp4">
+        </video>
+        <h3 id="functionality">1.2. Functionality</h3>
+        <p>
+          It comes with two main parts: a fetching robotand a booking application. The two subsystems are specifically designed to cohesively work together and have clear functionalities:
+          <ul>
+            <li>An application which creates bookings, shows availability of equipment at any given time and produces a unique booking QR code for each successful reservation.</li>
+            <li>An already built robot with control system which when given a QR code moves tothe location of the item specified in the booking and brings it to the customers. The  robot  also  comes  with  a  foot  measuring  device  and  a  cleaning  sprayer  fordisinfection.  An admin panel is provided for easy setup of the environment and designing the path around the place.</li>
+          </ul>
+        </p>
+        <h3>Robot</h3>
+        <p> <b> The robot </b> is the main component of the system. Its purpose is to fetch the skates for the user and collect their shoes, which will be placed on the shelf.  Whenthe user returns with the same QR code, the robot will fetch the shoes, and then return the skates.It  has  three  main  functionalities:  navigation, lifting, and pulling. The  robot is equiped with several distance sensors and infrared sensors which help it navigate around by following  lines  on  the floor while avoiding any potential obstacles. The lines(path) must be set up before the first start of the robot. This makes it able to be used in rooms of any size and shape. The robot is able to extend to a height of 2 meters with a payload of up to 5kg.</p>
+        <h4 style="padding-top: 5%;">Robot's navigation and picking in action</h4>
+        <video width="764" height="430" controls>
+          <source src="videos/pickbox.mp4" type="video/mp4">
+        </video>
+        <h4 style="padding-top: 5%;">Robot's lifting and pulling from close angle: </h4>
+        <video width="764" height="430" controls>
+          <source src="videos/lift_environment.mp4" type="video/mp4">
+        </video>
+        <h2 id="market-research">Market Research</h2>
+        <p>Add any market research you&rsquo;ve done to this page</p>
+        <h2 id="potential-for-future-development">Potential for Future Development</h2>
+        <p>What features could you add to your system? How could you change it to reach new people/adapt to new</p>
 
       </article>
 
