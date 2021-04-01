@@ -13,6 +13,11 @@ p {
   line-height: 1.5;
   margin: 0;
 }
+
+.new-line {
+  margin: 15px 0;
+}
+
 p a {
   /* text-decoration: underline */
   color: #008AFF;
@@ -20,6 +25,10 @@ p a {
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 800;
+}
+h3 {
+  padding-top: 3%; 
+  padding-bottom: 3%;
 }
 a {
   color: #008AFF;
@@ -264,6 +273,9 @@ img {
   }
 }
 
+.milestone-info {
+  padding-top: 5%;
+}
 /* --- Second nav --- */
 
 /* .inpage-menu-container {
