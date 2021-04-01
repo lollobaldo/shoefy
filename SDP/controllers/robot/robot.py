@@ -122,6 +122,6 @@ if __name__ == '__main__':
     r.initialize(robot)
     while True:
         order = [0,1,2,3]
-        pickandreturn(order, 1.7, 0)
+        pickandreturn(order, 1.7, -1)
         #add server instruction for when to return empty box
         #pickandreturn(order, 1.7, counter_height)
