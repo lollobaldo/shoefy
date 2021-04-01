@@ -84,7 +84,6 @@ def reverse(order, stop=False):
     return ans
 
 def align(ds0, ds1):
-    print(ds0, ds1)
     if ds0 <800 and ds0 < 800:
         stop()
         return True
@@ -181,10 +180,11 @@ def getOrder():
 	return order'''
 
 if __name__ == '__main__':
-    robot = Robot()
-    initialize(robot)
-    order = [0,1,1,2,3] #instructions for every intersections
-    run(robot, order)
-
-    rotate(robot)
-    run(robot, reverse(order, False))
+    #robot = Robot()
+    #initialize(robot)
+    #order = [0,1,1,2,3] #instructions for every intersections
+    #run(robot, order)
+#
+    #rotate(robot)
+    #run(robot, reverse(order, False))
+    print("sa")

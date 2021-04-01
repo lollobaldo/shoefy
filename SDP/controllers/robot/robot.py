@@ -96,13 +96,12 @@ def pull_box(box_height):
 
 def drop_box(box_height):
 
-    if pulling_device.state.id == "Reloading":
+    if pulling_device.state.id == "moving_mode":
 
         box_height += 0.02
-        lift.go(box_height)
+        lift.to_height(box_height)
         if  grabConnector.isLocked():
             arm.out()
-            print("press p to display reloading box")
             if arm.isOut():
                 grabConnector.unlock()
                 arm.inside()
@@ -111,17 +110,28 @@ def drop_box(box_height):
         else:
             print("The box is dropped on the floor")
 
-def pickandreturn(order, destination_height, source_height):
+def pickandreturn0(order, destination_height, source_height):
     r.run(robot,order)
     pull_box(destination_height)
     r.rotate(robot)
-    r.run(robot, r.reverse(order))
-    #r.drop_box(source_height) haven't tested this
+    r.run(robot, r.reverse(order, True))
+    drop_box(source_height)
+
+def pickandreturn1(order, destination_height, source_height):
+    pull_box(source_height)
+    r.rotate(robot)
+    r.run(order)
+    drop_box(destination_height)
+    r.rotate(robot)
+    r.run(robot, r.reverse(order,True))
+    r.rotate(robot)
 
 if __name__ == '__main__':
     r.initialize(robot)
     while True:
-        order = [0,1,2,3]
-        pickandreturn(order, 1.7, -1)
+        order = [0,1,2,3] #temp
+        #add server instruction for which box to pick
+        pickandreturn0(order, 1.7, 1.5)
         #add server instruction for when to return empty box
-        #pickandreturn(order, 1.7, counter_height)
+        #pickandreturn1(order, 1.7, 1.5)
+        break
