@@ -71,7 +71,7 @@ def rotate(robot):
             stop()
             break 
 
-def reverse(order):
+def reverse(order, stop=False):
     ans = []
     n = len(order)
     for i in range(n - 1):
@@ -79,7 +79,8 @@ def reverse(order):
             ans.append(2)
         else:
             ans.append((order[n-i-2] + 1) % 2)
-    ans.append(4)
+    if stop: ans.append(4)
+    else: ans.append(3)
     return ans
 
 def align(ds0, ds1):
@@ -186,4 +187,4 @@ if __name__ == '__main__':
     run(robot, order)
 
     rotate(robot)
-    run(robot, reverse(order))
+    run(robot, reverse(order, False))

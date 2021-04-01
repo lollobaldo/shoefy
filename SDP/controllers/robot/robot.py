@@ -127,5 +127,5 @@ if __name__ == '__main__':
 
 
     
-    r.run(robot, r.reverse(order))
+    r.run(robot, r.reverse(order, False))
     
