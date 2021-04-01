@@ -111,21 +111,17 @@ def drop_box(box_height):
         else:
             print("The box is dropped on the floor")
 
-
+def pickandreturn(order, destination_height, source_height):
+    r.run(robot,order)
+    pull_box(destination_height)
+    r.rotate(robot)
+    r.run(robot, r.reverse(order))
+    #r.drop_box(source_height) haven't tested this
 
 if __name__ == '__main__':
     r.initialize(robot)
-    order = [0,1,2,3]
-    r.run(robot, order)
-    #face the shelves
-    print("start pulling")
-    #level2 = 1.68
-    pull_box(1.7)
-    #turn robot back
-    r.rotate(robot)
-
-
-
-    
-    r.run(robot, r.reverse(order, False))
-    
+    while True:
+        order = [0,1,2,3]
+        pickandreturn(order, 1.7, -1)
+        #add server instruction for when to return empty box
+        #pickandreturn(order, 1.7, counter_height)
