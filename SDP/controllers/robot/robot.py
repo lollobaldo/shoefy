@@ -120,8 +120,8 @@ def pickandreturn(order, destination_height, source_height):
 
 if __name__ == '__main__':
     r.initialize(robot)
-    order = [0,1,2,3]
     while True:
+        order = [0,1,2,3]
         pickandreturn(order, 1.7, 0)
         #add server instruction for when to return empty box
         #pickandreturn(order, 1.7, counter_height)
