@@ -91,7 +91,22 @@ class Reloading(State):
 
     def on_event(self, event):
         if event == 'box_returned':
-            return free_Arm()
+            return Waiting_forOrder()
+        return self
+
+    def get_boxHeight(self, height):
+        """
+        Will be triggered only when server give a height
+        """
+
+        return self
+class Waiting_forOrder(State):
+    """
+    The state which indicates that the robot drop the box to the
+    """
+
+    def on_event(self, event):
+
         return self
 
     def get_boxHeight(self, height):

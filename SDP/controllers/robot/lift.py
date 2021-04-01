@@ -28,3 +28,7 @@ class Lift():
     def to_height(self,height):
         for lm in self.motors:
             lm.setPosition((height-1)/4)
+
+    def going_down(self, height):
+        for i in range(len(self.motors)):
+            self.motors[(3 - i)].setPosition((height - 1) / 4)

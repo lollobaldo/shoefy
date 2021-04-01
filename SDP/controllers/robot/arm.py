@@ -8,14 +8,18 @@ class Arm():
  
     def out(self):
         #print('pushing')
-        self.motor.setPosition(0.55)
+        self.motor.setPosition(0.7)
 
     def inside(self):
         #print('pulling')
         self.motor.setPosition(0)
  
-    def isOut(self,target_height):
+    def isOut(self):
         pos = self.sensor.getValue()
         #print(pos)
-        return abs(pos -((target_height-1)/4))<0.001
+        return abs(pos -0.55)<0.001
+    def isInside(self):
+        pos = self.sensor.getValue()
+        #print(pos)
+        return abs(pos)<0.001
 
