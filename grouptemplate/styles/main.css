@@ -1,0 +1,36 @@
+.inpage-menu-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    /* justify-content: space-bw; */
+}
+
+/* responsive */
+@media only screen and (max-width: 800px) {
+    .inpage-menu-container {
+        flex-direction: column;
+        max-width: 150px;
+        margin: auto;
+    }
+}
+
+.inpage-menu-container div {
+    border: 1px solid rgb(0, 0, 0);
+    flex-grow: 1;
+}
+
+
+.inpage-menu-container div a {
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    /* font-weight: bold; */
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.inpage-menu-container div a:hover {
+    background: rgba(20, 33, 61, 0.0);
+    text-decoration: none;
+}

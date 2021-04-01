@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Group Name</title>
+    <link>https://sdp2020.gitlab.io/grouptemplate/</link>
+    <description>Recent content on Group Name</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://sdp2020.gitlab.io/grouptemplate/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Budget</title>
+      <link>https://sdp2020.gitlab.io/grouptemplate/budget/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sdp2020.gitlab.io/grouptemplate/budget/</guid>
+      <description>Budget Summarise how your spent your budget and how the cost affects certain use cases.
+Are there different costs associated with different use cases? Are there any other considerations to be taken with regards to cost?
+You should include the costs taken from your budget and the cost of your equipment.
+Tables could be useful in presenting this data. An example table is shown below:
+   Item Quantity Cost Per Unit Total     thing 2 £5 £10   stuff 45 £2 £90    Example HTML Usage Using HTML</description>
+    </item>
+    
+    <item>
+      <title>Comments</title>
+      <link>https://sdp2020.gitlab.io/grouptemplate/comments/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sdp2020.gitlab.io/grouptemplate/comments/</guid>
+      <description>Ask us Questions During the Industrial Day A platform for the judges to ask you questions will be added before the industrial day.</description>
+    </item>
+    
+    <item>
+      <title>Evaluation</title>
+      <link>https://sdp2020.gitlab.io/grouptemplate/evaluation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sdp2020.gitlab.io/grouptemplate/evaluation/</guid>
+      <description>Evaluation Tests Show the results of testing where available. This can include tables, graphs, videos etc. Be careful to present data in an appropriate manner and be clear about the conclusions drawn from whatever it is you present
+User Tests Present any user testing you have performed for your product. The same advice about presenting data should be used as above
+Main Areas of Improvement What did you learn from your testing?</description>
+    </item>
+    
+    <item>
+      <title>System</title>
+      <link>https://sdp2020.gitlab.io/grouptemplate/howdoesitwork/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sdp2020.gitlab.io/grouptemplate/howdoesitwork/</guid>
+      <description>Methods Explain the key methods of how you got your system to work
+System Diagrams You should include images (where available) which illustrate the methods you used, how the system works etc.
+This can include system diagrams, images of your system in certain states etc.</description>
+    </item>
+    
+    <item>
+      <title>System</title>
+      <link>https://sdp2020.gitlab.io/grouptemplate/system/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sdp2020.gitlab.io/grouptemplate/system/</guid>
+      <description>Concept Summarise what your system does, its target market and uses cases here
+Functionality What features does your system have? Why should a viewer/investor be interested?
+Videos/Images/Interactive Interfaces Throughout this page, you should add videos/interactive apps/images to your sections if available/appropriate
+Examples:
+Link to youtube video
+ Link embedded video from source
+ Market Research Add any market research you&amp;rsquo;ve done to this page
+Potential for Future Development What features could you add to your system?</description>
+    </item>
+    
+    <item>
+      <title>Team</title>
+      <link>https://sdp2020.gitlab.io/grouptemplate/team/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sdp2020.gitlab.io/grouptemplate/team/</guid>
+      <description>Team Members and Roles     Name Role      Person 1 Software Person    Person 2 Hardware Person    Person 3 Project Manager    Team Management Use this section to demonstrate how your team was organised. How did you distribute your work? Which development tools did you use? Did you use git? Asana etc? This section might contain your Gantt chart or other similar diagrams.</description>
+    </item>
+    
+  </channel>
+</rss>
