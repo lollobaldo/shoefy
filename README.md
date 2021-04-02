@@ -1,3 +1,1 @@
-DISCLAIMER!!!!!
-
-This is not the final code of the project. It's just to show what we used for sharing code between us.
+NB - This is not the final code of the system. We used this GitHub to share code back and forth while working mostly separately on the different parts of the project. It serves only as a record of some of the development milestones we hit along the way.
